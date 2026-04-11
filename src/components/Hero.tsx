@@ -1,74 +1,63 @@
 import { ArrowUpRight, Play } from "lucide-react";
 import { motion } from "motion/react";
-import { useRef, useEffect } from "react";
+import { useState } from "react";
+import MuxPlayer from "@mux/mux-player-react";
 import BlurText from "./BlurText";
 
 export default function Hero() {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const handleCanPlay = () => {
-      video.style.opacity = "1";
-    };
-
-    video.addEventListener("canplay", handleCanPlay);
-    return () => video.removeEventListener("canplay", handleCanPlay);
-  }, []);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   return (
     <section className="relative min-h-[1000px] flex flex-col items-center pt-[150px] px-6 overflow-hidden">
 
       {/* 🎥 Background Video */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
 
-        <motion.video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          poster="https://res.cloudinary.com/dkghjbwkd/image/upload/f_auto,q_auto,w_1280/v1775796090/firstframe_m2ijky.jpg"
-          src="https://res.cloudinary.com/dkghjbwkd/video/upload/f_auto,q_auto/v1775795336/Genwe-Showreel-optimized-rf26_mtlzfv.mp4"
-          initial={{ scale: 1.08 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 6, ease: "easeOut" }}
-          className="absolute left-0 top-0 w-full h-full object-cover opacity-0 transition-opacity duration-700"
-        />
+          <MuxPlayer
+            playbackId="IBuQ9k5NTE701f6lWm4k7WrGCWrn6iH7c902c2w374oPw"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            streamType="on-demand"
+            poster={`https://image.mux.com/IBuQ9k5NTE701f6lWm4k7WrGCWrn6iH7c902c2w374oPw/thumbnail.jpg?time=0.1`}
+            style={{ pointerEvents: "none" }}
+            className="absolute -top-23.5 left-0 w-full h-[calc(100%+1rem)] object-cover"
+          />
 
-        {/* 🎬 Clean Cinematic Overlay */}
+        </div>
+        {/* 🎬 Overlays */}
         <div className="absolute inset-0">
 
+        <div className="hero-vignette" />  
+
           {/* Base dim */}
-          <div className="absolute inset-0 bg-black/25" />
+          <div className="absolute inset-0" />
 
           {/* Soft vignette */}
           <div className="absolute inset-0 
             bg-[radial-gradient(circle,transparent_45%,rgba(0,0,0,0.5))]" 
           />
 
-          {/* Center focus glow */}
+          {/* Center glow */}
           <div className="absolute inset-0 
             bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06),transparent_60%)]" 
           />
 
-          {/* 🎬 Bottom cinematic fade (SECTION TRANSITION FIX) */}
+          {/* Bottom fade */}
           <div
-            className="absolute bottom-0 left-0 w-full h-[250px] pointer-events-none"
+            className="absolute -top-[150px] left-0 w-full h-[calc(100%+150px)] object-cover"
             style={{
-            background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%)",
+              background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%)",
             }}
-/>
+          />
         </div>
-      </div>
 
       {/* 🎯 Content */}
       <div className="relative z-10 flex flex-col items-center text-center max-w-3xl">
 
-        {/* 🔥 Liquid Glass Badge (Refined, not loud) */}
+        {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -122,17 +111,15 @@ export default function Hero() {
           transition={{ delay: 1.1, duration: 0.8 }}
           className="flex flex-wrap items-center justify-center gap-6"
         >
-          {/* Primary CTA (Glass but controlled) */}
           <button className="liquid-glass-strong rounded-full px-8 py-4 text-white font-medium flex items-center gap-2 group backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20 transition">
             Create Your Film
             <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </button>
 
-          {/* Secondary CTA */}
-          <button className="flex items-center gap-3 text-white/90 font-medium hover:text-white transition-colors">
-            <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-white/5 backdrop-blur-sm">
+          <button className="liquid-glass-strong rounded-full px-8 py-4 text-white font-medium flex items-center gap-2 group backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20 transition">
+            {/* <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-white/5 backdrop-blur-sm"> */}
               <Play className="w-5 h-5 fill-white" />
-            </div>
+            {/* </div> */}
             View Our Work
           </button>
         </motion.div>

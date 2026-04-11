@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { projects } from "./data/projects";
+import MuxPlayer from "@mux/mux-player-react";
 
 export default function ProjectPage() {
   const { slug } = useParams();
@@ -17,6 +18,7 @@ export default function ProjectPage() {
   return (
     <div className="bg-black min-h-screen selection:bg-white selection:text-black px-6 py-24">
       <div className="max-w-4xl mx-auto">
+
         {/* Back Link */}
         <button
           onClick={() => navigate(-1)}
@@ -26,12 +28,15 @@ export default function ProjectPage() {
           Back to Work
         </button>
 
-        {/* Full Video */}
+        {/* 🎥 Full Video (MUX) */}
         <div className="liquid-glass rounded-3xl overflow-hidden mb-16 shadow-2xl">
-          <video
-            src={project.fullVideoSrc}
+          <MuxPlayer
+            playbackId={project.playbackId}
             controls
             playsInline
+            streamType="on-demand"
+            preload="metadata"
+            poster={`https://image.mux.com/${project.playbackId}/thumbnail.jpg?time=1`}
             className="w-full aspect-video object-cover"
           />
         </div>
@@ -50,6 +55,7 @@ export default function ProjectPage() {
             {project.description}
           </p>
         </div>
+
       </div>
     </div>
   );

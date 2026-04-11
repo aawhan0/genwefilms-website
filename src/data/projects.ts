@@ -3,33 +3,32 @@ export interface Project {
   title: string;
   description: string;
   type: string;
-  previewSrc: string;
-  fullVideoSrc: string;
+  playbackId: string;
 }
 
 export const projects: Project[] = [
   {
-    slug: "the-origin-story",
-    title: "The Origin Story",
-    description: "A cinematic brand film that repositioned a D2C skincare label as a premium lifestyle brand.",
+    slug: "Cord",
+    title: "Cord: Conceptual brand film",
+    description:
+      "A conceptual brand film for a sustainable clothing brand, exploring themes of nature, growth, and transformation through poetic visuals and storytelling.",
     type: "Conceptual Brand Film",
-    previewSrc: "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260307_083826_e938b29f-a43a-41ec-a153-3d4730578ab8.mp4", // Placeholder, using hero video for now as I don't have the specific project videos
-    fullVideoSrc: "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260307_083826_e938b29f-a43a-41ec-a153-3d4730578ab8.mp4",
+    playbackId: "xAIeg5qe1k4z3A6bKmQ2oo3inamQv1IwYgMm00JVVQbE",
   },
   {
-    slug: "in-every-drop",
-    title: "In Every Drop",
-    description: "A product advertisement film shot with motion control rigs, capturing texture and craft at macro scale.",
-    type: "Product Ad Film",
-    previewSrc: "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260307_083826_e938b29f-a43a-41ec-a153-3d4730578ab8.mp4",
-    fullVideoSrc: "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260307_083826_e938b29f-a43a-41ec-a153-3d4730578ab8.mp4",
+    slug: "Aashirvaad Atta",
+    title: "Aashirvaad Atta: Product advertisement film",
+    description:
+      "A product advertisement film for Aashirvaad Atta, showcasing the product's quality and versatility through vibrant visuals, dynamic camera work, and a compelling narrative that resonates with the target audience.",
+    type: "Product Advertisement Film",
+    playbackId: "NZc7bFYTfzQBdjcmlldI9nEmfosHUGZDsg7R48BCvEo",
   },
   {
-    slug: "boundless",
-    title: "Boundless",
-    description: "A fully CGI-rendered advertisement exploring the future of performance sportswear for a Gen-Z audience.",
-    type: "CGI Ad Film",
-    previewSrc: "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260307_083826_e938b29f-a43a-41ec-a153-3d4730578ab8.mp4",
-    fullVideoSrc: "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260307_083826_e938b29f-a43a-41ec-a153-3d4730578ab8.mp4",
+    slug: "Kia In Himalayas",
+    title: "Kia in Himalayas: CGI advertisement film",
+    description:
+      "A CGI advertisement film for Kia, set in the majestic Himalayas, highlighting the vehicle's performance, durability, and design through breathtaking visuals, dynamic camera angles, and a narrative that emphasizes adventure and exploration.",
+    type: "CGI Advertisement Film",
+    playbackId: "l5Jei2fpnkXJWTcL8ypUc10201vgDLZG00p01BHfe3IGikg",
   },
 ];

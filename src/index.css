@@ -119,8 +119,50 @@
     mask-composite: exclude;
     pointer-events: none;
   }
-}
 
+  .video-vignette{
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .video-vignette::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 25%, transparent 75%, rgba(0,0,0,0.9)),
+      linear-gradient(to right, rgba(0,0,0,0.6), transparent 20%, transparent 80%, rgba(0,0,0,0.6));
+
+  }
+
+  .hero-vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero-vignette::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.9) 0%,
+        rgba(0,0,0,0.4) 85%,
+        transparent 50%,
+      ),
+
+      linear-gradient(
+        to right,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0.6) 30%,
+        transparent 60%,
+      );
+    }
+
+  }
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -131,4 +173,67 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading italic;
   }
+}
+
+/* 🎥 Mux Player UI Removal (clean background video) */
+mux-player::part(center play-button) {
+  display: none !important;
+}
+
+mux-player::part(center play-button circle) {
+  display: none !important;
+}
+
+mux-player::part(center play-button icon) {
+  display: none !important;
+}
+
+mux-player::part(media-control-bar) {
+  display: none !important;
+}
+
+mux-player::part(media-loading-indicator) {
+  display: none !important;
+}
+
+mux-player::part(media-error-dialog) {
+  display: none !important;
+}
+
+
+/* Hide Mux UI ONLY inside cards */
+.group mux-player::part(media-control-bar),
+.group mux-player::part(center play-button),
+.group mux-player::part(media-loading-indicator),
+.group mux-player::part(top),
+.group mux-player::part(bottom) {
+  display: none !important;
+}
+
+/* 🔥 REMOVE ALL UI FROM BACKGROUND VIDEOS */
+.mux-bg::part(media-control-bar),
+.mux-bg::part(center play-button),
+.mux-bg::part(media-loading-indicator),
+.mux-bg::part(top),
+.mux-bg::part(bottom) {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+.mux-bg {
+  pointer-events: none;
+}
+
+
+mux-player {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+mux-player::part(video) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 🔥 THIS IS THE KEY */
 }

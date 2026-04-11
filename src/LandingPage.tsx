@@ -6,20 +6,38 @@ import Navbar from "./components/Navbar";
 import SelectedWork from "./components/SelectedWork";
 import StartSection from "./components/StartSection";
 import WhyUs from "./components/WhyUs";
+import Noise from "./components/Noise";
 
 export default function LandingPage() {
   return (
-    <div className="bg-black min-h-screen selection:bg-white selection:text-black">
+
+    
+    <div className="bg-black min-h-screen selection:bg-white selection:text-black relative">
+      
+      <Noise/>
+
       <Navbar />
+
       <main>
         <Hero />
+
         <StartSection />
-        <FeaturesChess />
+
+        {/* <FeaturesChess /> */}
+
         <FeaturesGrid />
+
         <WhyUs />
+
         <SelectedWork />
+
         <CtaFooter />
       </main>
+
+      {/* 🔥 GLOBAL NOISE OVERLAY */}
+      {/* <div className="noise-overlay" /> */}
+      
+
     </div>
   );
 }
