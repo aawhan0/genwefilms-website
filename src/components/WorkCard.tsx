@@ -75,12 +75,12 @@ export default function WorkCard({ project }: WorkCardProps) {
       </div>
 
       {/* 📝 CARD BODY */}
-      <div className="p-8">
-        <h3 className="text-white font-heading italic text-2xl mb-3">
+      <div className="p-6 md:p-8">
+        <h3 className="text-white font-heading italic text-xl md:text-2xl mb-2 md:mb-3">
           {project.title}
         </h3>
 
-        <p className="text-white/70 font-body font-light text-sm leading-relaxed mb-6">
+        <p className="text-white/70 font-body font-light text-sm leading-relaxed mb-4 md:mb-6 line-clamp-2 md:line-clamp-none">
           {project.description}
         </p>
 
@@ -88,6 +88,7 @@ export default function WorkCard({ project }: WorkCardProps) {
           {project.type}
         </span>
       </div>
+
     </motion.div>
   );
 }

@@ -27,10 +27,10 @@ const features = [
 
 export default function FeaturesGrid() {
   return (
-    <section className="relative py-36 px-6 overflow-hidden">
+    <section className="relative py-24 md:py-36 px-6 overflow-hidden">
 
       {/* 🎥 Background Video (MUX) */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      <div className="bg-video-container">
         <MuxPlayer
           playbackId="MTtHmG8ANNT1tCa3W5qzCBppEk01TicXxl93Vqfwk3bs"
           autoPlay
@@ -39,35 +39,37 @@ export default function FeaturesGrid() {
           playsInline
           streamType="on-demand"
           preload="metadata"
-          className="absolute w-full h-full object-cover mux-bg"
+          className="bg-video"
         />
-
-        {/* 🎨 Overlay (IMPORTANT for readability) */}
-        <div className="absolute inset-0 bg-black/60" />
-
-        <div className="video-vignette" />
-
-        {/* Gradients */}
-        <div className="absolute top-0 left-0 right-0 h-[200px] bg-gradient-to-b from-black to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-[200px] bg-gradient-to-t from-black to-transparent" />
       </div>
+
+
+
+      {/* 🎨 Overlay (IMPORTANT for readability) */}
+      <div className="absolute inset-0 bg-black/60" />
+      <div className="video-vignette" />
+
+      {/* Gradients */}
+      <div className="absolute top-0 left-0 right-0 h-[150px] md:h-[200px] bg-gradient-to-b from-black to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-[150px] md:h-[200px] bg-gradient-to-t from-black to-transparent" />
+
 
       {/* 📝 Content */}
       <div className="relative z-10 max-w-7xl mx-auto">
 
         {/* Header */}
-        <div className="flex flex-col items-center text-center gap-6 mb-20">
-          <span className="liquid-glass rounded-full px-5 py-1.5 text-xs font-medium text-white uppercase tracking-widest">
+        <div className="flex flex-col items-center text-center gap-4 md:gap-6 mb-12 md:mb-20">
+          <span className="liquid-glass rounded-full px-5 py-1.5 text-[10px] md:text-xs font-medium text-white uppercase tracking-widest">
             What We Create
           </span>
 
-          <h2 className="text-5xl md:text-7xl font-heading italic text-white tracking-tight">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-heading italic text-white tracking-tight">
             Three worlds. One studio.
           </h2>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {features.map((feature, i) => (
             <motion.div
               key={feature.title}
@@ -75,13 +77,13 @@ export default function FeaturesGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="liquid-glass rounded-3xl p-8 flex flex-col gap-6 group hover:bg-white/5 transition-all duration-500 hover:scale-[1.02]"
+              className="liquid-glass rounded-3xl p-6 md:p-8 flex flex-col gap-5 md:gap-6 group hover:bg-white/5 transition-all duration-500 hover:scale-[1.02]"
             >
-              <div className="liquid-glass-strong rounded-full w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <feature.icon className="w-6 h-6 text-white" />
+              <div className="liquid-glass-strong rounded-full w-12 h-12 md:w-14 md:h-14 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <feature.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
               </div>
 
-              <h3 className="text-2xl font-heading italic text-white">
+              <h3 className="text-xl md:text-2xl font-heading italic text-white">
                 {feature.title}
               </h3>
 
@@ -94,5 +96,6 @@ export default function FeaturesGrid() {
 
       </div>
     </section>
+
   );
 }

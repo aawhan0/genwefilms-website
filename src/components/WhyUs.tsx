@@ -40,42 +40,38 @@ export default function WhyUs() {
   }, []);
 
   return (
-    <section className="relative min-h-[800px] flex items-center justify-center overflow-hidden py-32 px-6">
+    <section className="relative min-h-[600px] md:min-h-[800px] flex items-center justify-center overflow-hidden py-24 md:py-32 px-4 md:px-6">
       {/* Background Video */}
-      <div className="absolute inset-0 z-0">
+      <div className="bg-video-container">
         <video
           ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover saturate-0 opacity-40"
-        />
-
-        {/* Cleaner overlay (less muddy) */}
-        <div className="absolute inset-0 bg-black/30" />
-
-        {/* Top fade */}
-        <div className="absolute top-0 left-0 right-0 h-[200px] bg-gradient-to-b from-black to-transparent" />
-
-        {/* Bottom cinematic fade */}
-        <div
-          className="absolute bottom-0 left-0 w-full h-[250px]"
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%)",
-          }}
+          className="bg-video saturate-0 opacity-40"
         />
       </div>
+
+      {/* Overlays */}
+      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute top-0 left-0 right-0 h-[150px] md:h-[200px] bg-gradient-to-b from-black to-transparent" />
+      <div
+        className="absolute bottom-0 left-0 w-full h-[200px] md:h-[250px]"
+        style={{
+          background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%)",
+        }}
+      />
+
 
       {/* Content Card */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative z-10 liquid-glass rounded-[3rem] p-12 md:p-20 max-w-7xl w-full"
+        className="relative z-10 liquid-glass rounded-[2rem] md:rounded-[3rem] p-8 md:p-20 max-w-7xl w-full"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-16">
           {reasons.map((reason, i) => (
             <motion.div
               key={reason.headline}
@@ -83,13 +79,13 @@ export default function WhyUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="space-y-6"
+              className="space-y-4 md:space-y-6"
             >
-              <h4 className="text-2xl md:text-3xl font-heading italic text-white leading-tight">
+              <h4 className="text-xl md:text-3xl font-heading italic text-white leading-tight">
                 {reason.headline}
               </h4>
 
-              <p className="text-white/70 font-body font-light text-base leading-relaxed">
+              <p className="text-white/70 font-body font-light text-sm md:text-base leading-relaxed">
                 {reason.body}
               </p>
             </motion.div>
@@ -97,5 +93,6 @@ export default function WhyUs() {
         </div>
       </motion.div>
     </section>
+
   );
 }
