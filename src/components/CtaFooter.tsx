@@ -23,7 +23,7 @@ export default function CtaFooter() {
   return (
     <section className="relative min-h-[700px] md:min-h-[900px] flex flex-col items-center justify-center overflow-hidden pt-24 md:pt-40 pb-12 px-6">
       {/* Background Video */}
-      <div className="bg-video-container">
+      <div className="bg-video-container pointer-events-none">
         <video
           ref={videoRef}
           autoPlay
@@ -33,6 +33,7 @@ export default function CtaFooter() {
           className="bg-video opacity-50"
         />
       </div>
+
 
       {/* Overlays */}
       <div className="absolute inset-0 bg-black/50" />

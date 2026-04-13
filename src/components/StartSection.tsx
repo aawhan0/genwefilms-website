@@ -24,7 +24,7 @@ export default function StartSection() {
     <section className="relative min-h-[600px] md:min-h-[700px] flex items-center justify-center overflow-hidden py-20 md:py-24">
 
       {/* 🎥 Background Video */}
-      <div className="bg-video-container">
+      <div className="bg-video-container pointer-events-none">
         <video
           ref={videoRef}
           autoPlay
@@ -34,6 +34,7 @@ export default function StartSection() {
           className="bg-video"
         />
       </div>
+
 
       {/* 🎨 Overlays (improved readability) */}
       <div className="absolute inset-0 bg-black/65" />

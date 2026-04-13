@@ -8,7 +8,7 @@ export default function SelectedWork() {
     <section className="relative py-24 md:py-36 px-6 overflow-hidden">
 
       {/* 🎥 Background Video */}
-      <div className="bg-video-container">
+      <div className="bg-video-container pointer-events-none">
         <MuxPlayer
           playbackId="Ij4XZbrO4dijnvqqlUQurDR5mqglkTRJo3mrK6QaJ7w"
           autoPlay
@@ -20,6 +20,7 @@ export default function SelectedWork() {
           className="bg-video"
         />
       </div>
+
 
 
 

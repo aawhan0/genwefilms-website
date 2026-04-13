@@ -42,7 +42,7 @@ export default function WhyUs() {
   return (
     <section className="relative min-h-[600px] md:min-h-[800px] flex items-center justify-center overflow-hidden py-24 md:py-32 px-4 md:px-6">
       {/* Background Video */}
-      <div className="bg-video-container">
+      <div className="bg-video-container pointer-events-none">
         <video
           ref={videoRef}
           autoPlay
@@ -52,6 +52,7 @@ export default function WhyUs() {
           className="bg-video saturate-0 opacity-40"
         />
       </div>
+
 
       {/* Overlays */}
       <div className="absolute inset-0 bg-black/30" />

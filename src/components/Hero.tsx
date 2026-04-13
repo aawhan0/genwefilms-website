@@ -11,7 +11,7 @@ export default function Hero() {
     <section className="relative min-h-[700px] md:min-h-[1000px] flex flex-col items-center pt-[100px] md:pt-[150px] px-6 overflow-hidden">
 
       {/* 🎥 Background Video */}
-      <div className="bg-video-container">
+      <div className="bg-video-container pointer-events-none">
         <MuxPlayer
           playbackId="IBuQ9k5NTE701f6lWm4k7WrGCWrn6iH7c902c2w374oPw"
           autoPlay
@@ -22,8 +22,10 @@ export default function Hero() {
           streamType="on-demand"
           poster={`https://image.mux.com/IBuQ9k5NTE701f6lWm4k7WrGCWrn6iH7c902c2w374oPw/thumbnail.jpg?time=0.1`}
           className="bg-video"
+          metadataVideoTitle="Hero Background"
         />
       </div>
+
 
 
 

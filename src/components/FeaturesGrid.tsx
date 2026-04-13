@@ -30,7 +30,7 @@ export default function FeaturesGrid() {
     <section className="relative py-24 md:py-36 px-6 overflow-hidden">
 
       {/* 🎥 Background Video (MUX) */}
-      <div className="bg-video-container">
+      <div className="bg-video-container pointer-events-none">
         <MuxPlayer
           playbackId="MTtHmG8ANNT1tCa3W5qzCBppEk01TicXxl93Vqfwk3bs"
           autoPlay
@@ -42,6 +42,7 @@ export default function FeaturesGrid() {
           className="bg-video"
         />
       </div>
+
 
 
 
