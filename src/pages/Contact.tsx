@@ -4,9 +4,9 @@ import CtaFooter from "../components/CtaFooter";
 import ContactForm from "../components/ContactForm";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import Aurora from "../components/Aurora";
 
 export default function Contact() {
-
   const { hash } = useLocation();
 
   useEffect(() => {
@@ -19,57 +19,53 @@ export default function Contact() {
   }, [hash]);
 
   return (
-    <main className="bg-black min-h-screen text-white">
-      <Navbar />
+    <div className="relative min-h-screen text-white overflow-hidden">
 
-      {/* Hero Header */}
-      <section className="pt-48 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="text-white/40 text-[10px] md:text-xs tracking-[0.4em] uppercase mb-8"
-        >
-          Contact Us
-        </motion.span>
-        
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-6xl md:text-[10rem] font-heading italic leading-[0.75] tracking-tighter mb-12"
-        >
-          Let's talk <br /> about vision.
-        </motion.h1>
-      </section>
+      {/* ✅ TRUE BACKGROUND */}
+      <div className="absolute inset-0 -z-10">
+        <Aurora
+          colorStops={["#7cff67", "#B497CF", "#5227FF"]}
+          blend={0.5}
+          amplitude={1.0}
+          speed={0.5}
+        />
+      </div>
 
-      {/* Form Section */}
-      <section id="contact-form" className="pb-32">
-        <ContactForm />
-      </section>
+      {/* ✅ DARK OVERLAY WITH GRADIENT (for readability and blending into the section below) */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/20 via-black/50 to-[#0a0a0a]" />
 
+      {/* ✅ CONTENT */}
+      <main className="relative z-10">
 
-      {/* Trust & Info Bar */}
-      <section className="py-24 border-t border-white/5 bg-white/[0.01]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-wrap justify-center gap-12 md:gap-32">
-            <div className="flex flex-col gap-2 italic">
-              <span className="text-white/40 text-xs uppercase tracking-widest not-italic">Presence</span>
-              <span className="text-xl md:text-2xl font-heading">Global / Mumbai</span>
-            </div>
-            <div className="flex flex-col gap-2 italic">
-              <span className="text-white/40 text-xs uppercase tracking-widest not-italic">Direct</span>
-              <span className="text-xl md:text-2xl font-heading">hello@genwefilms.com</span>
-            </div>
-            <div className="flex flex-col gap-2 italic">
-              <span className="text-white/40 text-xs uppercase tracking-widest not-italic">Updates</span>
-              <span className="text-xl md:text-2xl font-heading">@genwefilms</span>
+        <Navbar />
+
+        {/* Centered Form Section */}
+        <section id="contact-form" className="pt-32 pb-20 md:pt-40 md:pb-32 flex items-center min-h-[90vh]">
+          <ContactForm />
+        </section>
+
+        {/* Info Section */}
+        <section className="py-24 border-t border-white/5 bg-white/[0.01]">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex flex-wrap justify-center gap-12 md:gap-32">
+              <div className="flex flex-col gap-2 italic">
+                <span className="text-white/40 text-xs uppercase tracking-widest not-italic">Presence</span>
+                <span className="text-xl md:text-2xl font-heading">Global</span>
+              </div>
+              <div className="flex flex-col gap-2 italic">
+                <span className="text-white/40 text-xs uppercase tracking-widest not-italic">Direct</span>
+                <span className="text-xl md:text-2xl font-heading">Contact@Genwefilms.com</span>
+              </div>
+              <div className="flex flex-col gap-2 italic">
+                <span className="text-white/40 text-xs uppercase tracking-widest not-italic">Updates</span>
+                <span className="text-xl md:text-2xl font-heading">@genwefilms</span>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <CtaFooter />
-    </main>
+        <CtaFooter />
+      </main>
+    </div>
   );
 }
-

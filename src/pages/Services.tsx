@@ -1,9 +1,10 @@
 import { motion } from "motion/react";
 import Navbar from "../components/Navbar";
 import CtaFooter from "../components/CtaFooter";
-import MuxPlayer from "@mux/mux-player-react";
+import Hls from "hls.js";
 import { Link } from "react-router-dom";
 import { Camera, Sparkles, Box, Share2 } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const services = [
   {
@@ -33,21 +34,37 @@ const services = [
 ];
 
 export default function Services() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const hlsUrl = "https://stream.mux.com/NcU3HlHeF7CUL86azTTzpy3Tlb00d6iF3BmCdFslMJYM.m3u8";
+
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(hlsUrl);
+      hls.attachMedia(video);
+      return () => hls.destroy();
+    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      video.src = hlsUrl;
+    }
+  }, []);
+
   return (
     <main className="bg-black min-h-screen text-white relative">
       <Navbar />
 
-      {/* 🎥 Background Video */}
-      <div className="bg-video-container pointer-events-none opacity-40">
-        <MuxPlayer
-          playbackId="vD0202Fp5O500y01I5E3zEAc7Zc5VvL00TshX00U98NnS89E"
+      {/* 🎥 Background Video (same as WhyUs) */}
+      <div className="bg-video-container pointer-events-none">
+        <video
+          ref={videoRef}
           autoPlay
-          muted
           loop
+          muted
           playsInline
-          streamType="on-demand"
-          preload="metadata"
-          className="bg-video"
+          className="bg-video saturate-0 opacity-40"
         />
       </div>
 
@@ -129,3 +146,4 @@ export default function Services() {
     </main>
   );
 }
+
