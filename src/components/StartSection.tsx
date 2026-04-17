@@ -1,6 +1,7 @@
 import Hls from "hls.js";
 import { motion } from "motion/react";
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 export default function StartSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -74,9 +75,9 @@ export default function StartSection() {
           </p>
 
           {/* CTA */}
-          <button className="w-full sm:w-auto liquid-glass-strong rounded-full px-10 py-4 text-white font-medium hover:scale-105 transition-transform">
+          <Link to="/contact#contact-form" className="w-full sm:w-auto liquid-glass-strong rounded-full px-10 py-4 text-white font-medium hover:scale-105 transition-transform text-center">
             Start Your Project
-          </button>
+          </Link>
 
         </motion.div>
       </div>

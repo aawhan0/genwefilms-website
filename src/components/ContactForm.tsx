@@ -23,7 +23,7 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto px-6">
+    <div id="contact-form" className="w-full max-w-3xl mx-auto px-6">
       <div className="text-center mb-16">
         <motion.h2
           initial={{ opacity: 0, y: 10 }}

@@ -1,6 +1,7 @@
 import Hls from "hls.js";
 import { motion } from "motion/react";
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 export default function CtaFooter() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -69,12 +70,12 @@ export default function CtaFooter() {
           transition={{ delay: 0.4 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 w-full px-6 sm:px-0"
         >
-          <button className="w-full sm:w-auto liquid-glass-strong rounded-full px-8 md:px-10 py-3 md:py-4 text-white font-medium text-base md:text-lg hover:scale-105 transition-transform">
+          <Link to="/contact#contact-form" className="w-full sm:w-auto liquid-glass-strong rounded-full px-8 md:px-10 py-3 md:py-4 text-white font-medium text-base md:text-lg hover:scale-105 transition-transform flex items-center justify-center">
             Let's Create Something
-          </button>
-          <button className="w-full sm:w-auto bg-white text-black rounded-full px-8 md:px-10 py-3 md:py-4 font-medium text-base md:text-lg hover:bg-white/90 transition-colors">
-            View Our Work
-          </button>
+          </Link>
+          <Link to="/services" className="w-full sm:w-auto bg-white text-black rounded-full px-8 md:px-10 py-3 md:py-4 font-medium text-base md:text-lg hover:bg-white/90 transition-colors flex items-center justify-center">
+            View Our Services
+          </Link>
         </motion.div>
       </div>
 

@@ -1,6 +1,7 @@
 import { ArrowUpRight, Play } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import MuxPlayer from "@mux/mux-player-react";
 import BlurText from "./BlurText";
 
@@ -112,15 +113,15 @@ export default function Hero() {
           transition={{ delay: 1.1, duration: 0.8 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 w-full px-6 sm:px-0"
         >
-          <button className="w-full sm:w-auto liquid-glass-strong rounded-full px-8 py-3 md:py-4 text-white font-medium flex items-center justify-center gap-2 group backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20 transition">
+          <Link to="/contact#contact-form" className="w-full sm:w-auto liquid-glass-strong rounded-full px-8 py-3 md:py-4 text-white font-medium flex items-center justify-center gap-2 group backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20 transition">
             Create Your Film
             <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </button>
+          </Link>
 
-          <button className="w-full sm:w-auto liquid-glass-strong rounded-full px-8 py-3 md:py-4 text-white font-medium flex items-center justify-center gap-2 group backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20 transition">
+          <Link to="/work" className="w-full sm:w-auto liquid-glass-strong rounded-full px-8 py-3 md:py-4 text-white font-medium flex items-center justify-center gap-2 group backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20 transition">
             <Play className="w-5 h-5 fill-white" />
             View Our Work
-          </button>
+          </Link>
         </motion.div>
       </div>
 
