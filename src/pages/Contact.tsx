@@ -40,7 +40,7 @@ export default function Contact() {
         <Navbar />
 
         {/* Centered Form Section */}
-        <section id="contact-form" className="pt-32 pb-20 md:pt-40 md:pb-32 flex items-center min-h-[90vh]">
+        <section id="contact-form" className="pt-28 md:pt-26 pb-16 md:pb-24 flex items-start">
           <ContactForm />
         </section>
 

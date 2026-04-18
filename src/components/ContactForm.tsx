@@ -1,16 +1,69 @@
 import { motion } from "motion/react";
 import { useState } from "react";
+import { supabase } from "../lib/supabase";
+import emailjs from "@emailjs/browser";
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [projectType, setProjectType] = useState("Ad Film");
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const projectTypes = ["Ad Film", "Brand Film", "Social Content", "AI Video"];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setSubmitted(true);
+
+    const form = new FormData(e.target);
+    const email = form.get("email") as string;
+
+    if (!validateEmail(email)) {
+      alert("Enter valid email");
+      return;
+    }
+
+    setLoading(true);
+
+    const data = {
+      name: form.get("name"),
+      email,
+      project_type: projectType,
+      timeline: form.get("timeline"),
+      message: form.get("message"),
+    };
+
+    try {
+      // ✅ Save to Supabase
+      await supabase.from("contacts").insert([data]);
+
+      // ✅ Email to client
+      await emailjs.send(
+        "service_genwefilms",
+        "TEMPLATE_ID_1", // replace
+        data,
+        "YOUR_PUBLIC_KEY" // replace
+      );
+
+      // ✅ Auto reply
+      await emailjs.send(
+        "service_genwefilms",
+        "TEMPLATE_ID_2", // replace
+        data,
+        "YOUR_PUBLIC_KEY"
+      );
+
+      setSubmitted(true);
+      e.target.reset();
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong");
+    }
+
+    setLoading(false);
   };
 
   if (submitted) {
@@ -29,7 +82,7 @@ export default function ContactForm() {
   return (
     <div id="contact-form" className="w-full max-w-6xl mx-auto px-4 md:px-6 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
       
-      {/* Left Side: Text (Outside Glass Card) */}
+      {/* Left Side */}
       <div className="lg:w-5/12 flex flex-col justify-center text-left">
         <motion.span
           initial={{ opacity: 0 }}
@@ -59,7 +112,7 @@ export default function ContactForm() {
         </motion.p>
       </div>
 
-      {/* Right Side: Form (Inside Glass Card) */}
+      {/* Form */}
       <motion.form
         initial={{ opacity: 0, x: 20 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -68,24 +121,18 @@ export default function ContactForm() {
         onSubmit={handleSubmit}
         className="lg:w-7/12 liquid-glass rounded-[2rem] border border-white/5 p-8 md:p-12 space-y-6 md:space-y-8"
       >
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
           <div className="flex flex-col gap-3">
             <label className="text-[10px] uppercase tracking-[0.2em] text-white/40 ml-4">Name</label>
-            <input
-              required
-              type="text"
-              placeholder="e.g. Julian Anderson"
-              className="bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white font-body focus:outline-none focus:border-white/30 transition-colors w-full"
-            />
+            <input name="name" required type="text" placeholder="e.g. Julian Anderson"
+              className="bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white font-body focus:outline-none focus:border-white/30 transition-colors w-full" />
           </div>
+
           <div className="flex flex-col gap-3">
             <label className="text-[10px] uppercase tracking-[0.2em] text-white/40 ml-4">Email</label>
-            <input
-              required
-              type="email"
-              placeholder="e.g. julian@brand.com"
-              className="bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white font-body focus:outline-none focus:border-white/30 transition-colors w-full"
-            />
+            <input name="email" required type="email" placeholder="e.g. julian@brand.com"
+              className="bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white font-body focus:outline-none focus:border-white/30 transition-colors w-full" />
           </div>
         </div>
 
@@ -93,26 +140,23 @@ export default function ContactForm() {
           <div className="flex flex-col gap-3">
             <label className="text-[10px] uppercase tracking-[0.2em] text-white/40 ml-4">Project Type</label>
             <div className="relative">
-              <div 
-                className="bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white font-body focus:outline-none focus:border-white/30 transition-colors w-full cursor-pointer flex justify-between items-center"
+              <div
+                className="bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white font-body cursor-pointer flex justify-between items-center"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
                 <span>{projectType}</span>
-                <span className="text-white/40 text-xs transition-transform duration-300" style={{ transform: dropdownOpen ? 'rotate(180deg)' : 'none' }}>↓</span>
+                <span className="text-white/40 text-xs" style={{ transform: dropdownOpen ? 'rotate(180deg)' : 'none' }}>↓</span>
               </div>
-              
-              {/* Custom Dropdown Options */}
+
               {dropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 w-full bg-[#111111] border border-white/10 rounded-2xl overflow-hidden z-50 flex flex-col shadow-2xl">
+                <div className="absolute top-full left-0 mt-2 w-full bg-[#111111] border border-white/10 rounded-2xl z-50">
                   {projectTypes.map(type => (
-                    <div 
-                      key={type}
-                      className="px-6 py-4 text-white font-body hover:bg-white/5 cursor-pointer transition-colors"
+                    <div key={type}
+                      className="px-6 py-4 text-white hover:bg-white/5 cursor-pointer"
                       onClick={() => {
                         setProjectType(type);
                         setDropdownOpen(false);
-                      }}
-                    >
+                      }}>
                       {type}
                     </div>
                   ))}
@@ -120,39 +164,32 @@ export default function ContactForm() {
               )}
             </div>
           </div>
+
           <div className="flex flex-col gap-3">
             <label className="text-[10px] uppercase tracking-[0.2em] text-white/40 ml-4">Timeline</label>
-            <input
-              type="text"
-              placeholder="e.g. Next 3 weeks"
-              className="bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white font-body focus:outline-none focus:border-white/30 transition-colors w-full"
-            />
+            <input name="timeline" type="text" placeholder="e.g. Next 3 weeks"
+              className="bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white font-body focus:outline-none focus:border-white/30 transition-colors w-full" />
           </div>
         </div>
 
         <div className="flex flex-col gap-3">
           <label className="text-[10px] uppercase tracking-[0.2em] text-white/40 ml-4">Project Brief</label>
-          <textarea
-            placeholder="Tell us a bit about your vision..."
-            rows={4}
-            className="bg-white/5 border border-white/10 rounded-[2rem] px-6 py-6 text-white font-body focus:outline-none focus:border-white/30 transition-colors w-full resize-none"
-          />
+          <textarea name="message" rows={4} placeholder="Tell us a bit about your vision..."
+            className="bg-white/5 border border-white/10 rounded-[2rem] px-6 py-6 text-white font-body resize-none" />
         </div>
 
         <div className="text-left pt-4">
-          <button
-            type="submit"
-            className="liquid-glass-strong rounded-full px-10 py-4 text-white font-medium hover:scale-105 transition-transform w-full sm:w-auto"
-          >
-            Start Your Project
+          <button type="submit"
+            className="liquid-glass-strong rounded-full px-10 py-4 text-white font-medium hover:scale-105 transition-transform w-full sm:w-auto">
+            {loading ? "Sending..." : "Start Your Project"}
           </button>
-          
-          <p className="mt-6 text-white/30 text-[10px] uppercase font-body tracking-wider">
+
+          <p className="mt-6 text-white/30 text-[10px] uppercase tracking-wider">
             Fast turnaround. Cinematic quality. Built to perform.
           </p>
         </div>
-      </motion.form>
 
+      </motion.form>
     </div>
   );
 }
