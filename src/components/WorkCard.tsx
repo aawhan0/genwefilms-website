@@ -39,14 +39,13 @@ export default function WorkCard({ project }: WorkCardProps) {
   return (
     <motion.div
       ref={cardRef}
-      className="liquid-glass rounded-3xl overflow-hidden cursor-pointer relative group"
+      className="group cursor-pointer flex flex-col h-full"
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
       onClick={() => navigate(`/work/${project.slug}`)}
     >
-      {/* 🎥 VIDEO */}
-      <div className="relative aspect-video overflow-hidden">
-
+      {/* 🎥 VIDEO CONTAINER */}
+      <div className="relative aspect-video overflow-hidden rounded-2xl bg-zinc-900">
         <MuxPlayer
           ref={videoRef}
           playbackId={project.playbackId}
@@ -58,24 +57,23 @@ export default function WorkCard({ project }: WorkCardProps) {
           autoPlay={false}
           {...({ controls: false } as any)}
           style={{ pointerEvents: "none" }}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           poster={`https://image.mux.com/${project.playbackId}/thumbnail.jpg?time=1`}
         />
 
         {/* 🎨 Overlay */}
-        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-500" />
+        <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
 
-        {/* ▶️ PLAY BUTTON (GLASS) */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <div className="liquid-glass-strong rounded-full w-16 h-16 flex items-center justify-center scale-75 group-hover:scale-100 transition-transform duration-500">
-            <Play className="w-6 h-6 text-white fill-white ml-1" />
+        {/* ▶️ PLAY BUTTON */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
+          <div className="liquid-glass-strong rounded-full w-14 h-14 flex items-center justify-center scale-75 group-hover:scale-100 transition-transform duration-500">
+            <Play className="w-5 h-5 text-white fill-white ml-0.5" />
           </div>
         </div>
-
       </div>
 
-      {/* 📝 CARD BODY */}
-      <div className="p-6 md:p-8">
+      {/* 📝 TEXT BELOW */}
+      <div className="pt-6 md:pt-8 flex flex-col flex-grow">
         <h3 className="text-white font-heading italic text-xl md:text-2xl mb-2 md:mb-3">
           {project.title}
         </h3>
@@ -84,9 +82,11 @@ export default function WorkCard({ project }: WorkCardProps) {
           {project.description}
         </p>
 
-        <span className="liquid-glass rounded-full px-4 py-1.5 text-[10px] font-body text-white/60 uppercase tracking-widest">
-          {project.type}
-        </span>
+        <div className="mt-auto">
+          <span className="liquid-glass rounded-full px-4 py-1.5 text-[10px] font-body text-white/60 uppercase tracking-widest inline-block">
+            {project.type}
+          </span>
+        </div>
       </div>
 
     </motion.div>

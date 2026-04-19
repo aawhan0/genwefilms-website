@@ -1,17 +1,21 @@
-import { ArrowUpRight, Play } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import MuxPlayer from "@mux/mux-player-react";
 import BlurText from "./BlurText";
 
 export default function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  return (
-    <section className="relative min-h-[700px] md:min-h-[1000px] flex flex-col items-center pt-[100px] md:pt-[150px] px-6 overflow-hidden">
+  const scrollToFilms = () => {
+    const el = document.getElementById("featured-films");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
 
-      {/* 🎥 Background Video */}
+  return (
+    <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
+
+      {/* 🎥 Background Video — Full-width showreel */}
       <div className="bg-video-container pointer-events-none">
         <MuxPlayer
           playbackId="IBuQ9k5NTE701f6lWm4k7WrGCWrn6iH7c902c2w374oPw"
@@ -27,125 +31,71 @@ export default function Hero() {
         />
       </div>
 
+      {/* 🎬 Overlays — Cinematic depth */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle,transparent_45%,rgba(0,0,0,0.6))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.04),transparent_60%)]" />
+        <div
+          className="absolute bottom-0 left-0 w-full h-[40%]"
+          style={{
+            background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%)",
+          }}
+        />
+      </div>
 
-
-
-        {/* 🎬 Overlays */}
-        <div className="absolute inset-0">
-          
-
-          {/* Base dim */}
-          <div className="absolute inset-0" />
-
-          {/* Soft vignette */}
-          <div className="absolute inset-0 
-            bg-[radial-gradient(circle,transparent_45%,rgba(0,0,0,0.5))]" 
-          />
-
-          {/* Center glow */}
-          <div className="absolute inset-0 
-            bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06),transparent_60%)]" 
-          />
-
-          {/* Bottom fade */}
-          <div
-            className="absolute -top-[150px] left-0 w-full h-[calc(100%+150px)] object-cover"
-            style={{
-              background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%)",
-            }}
-          />
-        </div>
-
-      {/* 🎯 Content */}
-      <div className="relative z-10 flex flex-col items-center text-center max-w-4xl">
-
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="liquid-glass rounded-full px-1 py-1 flex items-center gap-3 mb-6 md:mb-10 backdrop-blur-md bg-white/5 border border-white/10"
-        >
-          <div className="bg-white text-black rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider">
-            New
-          </div>
-          <span className="text-white/80 text-[10px] md:text-xs font-body pr-3">
-            Now Accepting New Clients
-          </span>
-        </motion.div>
-
-        {/* Heading */}
+      {/* 🎯 Minimal Content — One strong line */}
+      <div className="relative z-10 flex flex-col items-center text-center max-w-5xl px-6">
         <BlurText
           text="Films That Make Brands Unforgettable"
           className="
-            text-4xl sm:text-5xl md:text-7xl lg:text-[6.5rem] 
-            font-heading italic 
-            text-white/95 
-            leading-[0.9] md:leading-[0.85] 
-            tracking-tight 
-            mb-6 md:mb-8
-            drop-shadow-[0_4px_20px_rgba(0,0,0,0.35)]
+            text-5xl sm:text-6xl md:text-8xl lg:text-[7rem]
+            font-heading italic
+            text-white
+            leading-[0.88]
+            tracking-tight
+            drop-shadow-[0_4px_30px_rgba(0,0,0,0.5)]
           "
         />
-
-        {/* Subtext */}
-        <motion.p
-          initial={{ filter: "blur(10px)", opacity: 0, y: 20 }}
-          animate={{ filter: "blur(0px)", opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-          className="
-            text-white/70 
-            font-body 
-            font-light 
-            text-base md:text-xl 
-            max-w-2xl 
-            mb-8 md:mb-12 
-            leading-relaxed
-          "
-        >
-          We don't just produce films. We craft cinematic experiences that move audiences and define brands.
-        </motion.p>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ filter: "blur(10px)", opacity: 0, y: 20 }}
-          animate={{ filter: "blur(0px)", opacity: 1, y: 0 }}
-          transition={{ delay: 1.1, duration: 0.8 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 w-full px-6 sm:px-0"
-        >
-          <Link to="/contact#contact-form" className="w-full sm:w-auto liquid-glass-strong rounded-full px-8 py-3 md:py-4 text-white font-medium flex items-center justify-center gap-2 group backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20 transition">
-            Create Your Film
-            <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
-
-          <Link to="/work" className="w-full sm:w-auto liquid-glass-strong rounded-full px-8 py-3 md:py-4 text-white font-medium flex items-center justify-center gap-2 group backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20 transition">
-            <Play className="w-5 h-5 fill-white" />
-            View Our Work
-          </Link>
-        </motion.div>
       </div>
 
-      {/* 🤝 Partners */}
-      <div className="mt-auto w-full max-w-7xl pb-12 md:pb-16 pt-24 md:pt-32 relative z-10">
-        <div className="flex flex-col items-center gap-8 md:gap-10">
-
-          <div className="text-white/40 text-[10px] md:text-xs tracking-[0.3em] uppercase">
-            Crafted for brands like
+      {/* 🤝 Partners — Subtle */}
+      <div className="absolute bottom-24 md:bottom-28 left-0 right-0 z-10 px-6">
+        <div className="flex flex-col items-center gap-5">
+          <div className="text-white/30 text-[9px] md:text-[10px] tracking-[0.35em] uppercase font-body">
+            Crafted for Brands like
           </div>
-
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-24 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
+          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-16 opacity-30">
             {["Mango", "Zepto", "boAt", "Mamaearth", "Nykaa"].map((brand) => (
               <span
                 key={brand}
-                className="text-2xl md:text-4xl font-heading italic text-white tracking-tight"
+                className="text-lg md:text-2xl font-heading italic text-white tracking-tight"
               >
                 {brand}
               </span>
             ))}
           </div>
-
         </div>
       </div>
+
+      {/* ⬇️ View Work CTA — Scroll to films */}
+      <motion.button
+        onClick={scrollToFilms}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-8 z-10 flex flex-col items-center gap-1 group cursor-pointer"
+      >
+        <span className="text-white/50 text-[10px] md:text-xs tracking-[0.25em] uppercase font-body group-hover:text-white/80 transition-colors">
+          View Work
+        </span>
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronDown className="w-5 h-5 text-white/40 group-hover:text-white/70 transition-colors" />
+        </motion.div>
+      </motion.button>
 
     </section>
   );

@@ -64,7 +64,7 @@ export default function Contact() {
           </div>
         </section>
 
-        <CtaFooter />
+        {/* <CtaFooter /> */}
       </main>
     </div>
   );

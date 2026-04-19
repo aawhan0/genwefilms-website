@@ -2,10 +2,10 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Barlow:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Barlow:wght@300;400;500;600;700&display=swap');
 
 @theme {
-  --font-heading: "Instrument Serif", serif;
+  --font-heading: "Instrument Serif", "Playfair Display", serif;
   --font-body: "Barlow", sans-serif;
 
   --color-background: hsl(var(--background));
@@ -169,53 +169,53 @@
   }
   body {
     @apply bg-background text-foreground font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading italic;
+    @apply font-heading italic font-semibold;
+    font-synthesis: weight; /* 🔥 Forces bolding if the font doesn't have it */
+    -webkit-font-smoothing: antialiased;
   }
 }
 
-/* 🎥 Mux Player UI Removal (clean background video) */
-mux-player::part(center play-button) {
-  display: none !important;
-}
+/* 🎥 Mux Player UI Removal (clean background video & preview cards) */
 
-mux-player::part(center play-button circle) {
-  display: none !important;
+/* Apply variables ONLY to background videos and preview cards */
+.group mux-player,
+mux-player.bg-video {
+  --media-loading-indicator-display: none !important;
+  --media-control-bar-display: none !important;
+  --media-center-controls-display: none !important;
 }
-
-mux-player::part(center play-button icon) {
-  display: none !important;
-}
-
-mux-player::part(media-control-bar) {
-  display: none !important;
-}
-
-mux-player::part(media-loading-indicator) {
-  display: none !important;
-}
-
-mux-player::part(media-error-dialog) {
-  display: none !important;
-}
-
 
 /* Hide Mux UI ONLY inside cards */
-.group mux-player::part(media-control-bar),
 .group mux-player::part(center play-button),
+.group mux-player::part(center play-button circle),
+.group mux-player::part(center play-button icon),
+.group mux-player::part(media-control-bar),
 .group mux-player::part(media-loading-indicator),
+.group mux-player::part(loading),
+.group mux-player::part(center),
 .group mux-player::part(top),
-.group mux-player::part(bottom) {
+.group mux-player::part(bottom),
+.group mux-player::part(media-error-dialog) {
   display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 /* 🔥 REMOVE ALL UI FROM BACKGROUND VIDEOS */
-.mux-bg::part(media-control-bar),
-.mux-bg::part(center play-button),
-.mux-bg::part(media-loading-indicator),
-.mux-bg::part(top),
-.mux-bg::part(bottom) {
+mux-player.bg-video::part(center play-button),
+mux-player.bg-video::part(center play-button circle),
+mux-player.bg-video::part(center play-button icon),
+mux-player.bg-video::part(media-control-bar),
+mux-player.bg-video::part(media-loading-indicator),
+mux-player.bg-video::part(loading),
+mux-player.bg-video::part(center),
+mux-player.bg-video::part(top),
+mux-player.bg-video::part(bottom),
+mux-player.bg-video::part(media-error-dialog) {
   display: none !important;
   opacity: 0 !important;
   visibility: hidden !important;

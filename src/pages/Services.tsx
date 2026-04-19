@@ -64,61 +64,56 @@ export default function Services() {
           loop
           muted
           playsInline
-          className="bg-video saturate-0 opacity-40"
+          className="bg-video saturate-0 opacity-50"
         />
       </div>
 
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-black/30" />
       <div className="absolute top-0 left-0 right-0 h-[300px] bg-gradient-to-b from-black to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-[300px] bg-gradient-to-t from-black to-transparent" />
 
-      {/* Hero Section */}
-      <section className="relative pt-40 pb-24 px-6 max-w-7xl mx-auto text-center z-10">
+      {/* Compact Hero Section */}
+      <section className="relative pt-32 pb-12 px-6 max-w-6xl mx-auto z-10">
         <motion.span
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-white/40 text-[10px] md:text-xs tracking-[0.3em] uppercase mb-6 block"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-white/40 text-[10px] tracking-[0.3em] uppercase mb-4 block"
         >
           Our Expertise
         </motion.span>
         <motion.h1
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="text-5xl md:text-8xl font-heading italic leading-[0.9] tracking-tighter mb-8"
-        >
-          Specialized production <br className="hidden md:block" /> for the modern era.
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="text-white/60 font-body text-lg md:text-2xl max-w-3xl mx-auto"
+          className="text-4xl md:text-6xl font-heading italic leading-none tracking-tighter mb-4"
         >
-          We don't do generic. We build cinematic assets that define, distinguish, and dominate.
-        </motion.p>
+          Modern Production.
+        </motion.h1>
       </section>
 
-      {/* Services Grid */}
-      <section className="relative py-24 px-6 max-w-7xl mx-auto z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+      {/* Compact Services Section */}
+      <section className="relative pb-20 px-6 max-w-6xl mx-auto z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/5">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="liquid-glass rounded-[2rem] p-8 md:p-12 border border-white/5 flex flex-col gap-6 hover:bg-white/5 transition-all duration-500 hover:scale-[1.01]"
+              transition={{ delay: i * 0.05 }}
+              className="bg-black/60 backdrop-blur-md p-8 md:p-10 flex flex-col gap-4 group hover:bg-white/[0.02] transition-colors duration-500"
             >
-              <div className="liquid-glass-strong rounded-full w-14 h-14 flex items-center justify-center">
-                <service.icon className="w-6 h-6 text-white" />
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-white/10 font-heading italic text-3xl md:text-4xl">
+                  0{i + 1}
+                </span>
+                <service.icon className="w-4 h-4 text-white/20 group-hover:text-white transition-colors" />
               </div>
-              <h2 className="text-3xl md:text-5xl font-heading italic tracking-tight">{service.title}</h2>
-              <div className="flex flex-col gap-4">
-                <p className="text-white font-medium text-xl md:text-2xl italic font-heading leading-tight">
-                  {service.hook}
-                </p>
-                <p className="text-white/50 font-body text-base md:text-lg leading-relaxed">
+
+              <div className="space-y-2">
+                <h2 className="text-2xl md:text-3xl font-heading italic text-white leading-tight">
+                  {service.title}
+                </h2>
+                <p className="text-white/40 font-body text-xs md:text-sm leading-relaxed max-w-xs group-hover:text-white/60 transition-colors">
                   {service.description}
                 </p>
               </div>
@@ -127,19 +122,85 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="relative py-32 px-6 text-center border-t border-white/5 z-10">
-        <motion.h2
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-3xl md:text-5xl font-heading italic mb-12"
-        >
-          Ready to define your brand's visual identity?
-        </motion.h2>
-        <Link to="/contact#contact-form" className="liquid-glass-strong rounded-full px-12 py-5 text-white font-medium text-lg hover:scale-105 transition-transform inline-block">
-          Start a Conversation
-        </Link>
+
+      {/* 🤝 Why Us Section (Integrated into Services Flow) */}
+      <section className="relative py-32 px-6 max-w-7xl mx-auto z-10 border-t border-white/5">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+          
+          {/* Left Side: Persuasion */}
+          <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-32 lg:h-fit">
+            <motion.span
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-white/40 text-[10px] tracking-[0.4em] uppercase font-body font-medium"
+            >
+              The Advantage
+            </motion.span>
+            
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-5xl md:text-7xl font-heading italic leading-[0.85] tracking-tighter"
+            >
+              Why <br /> Genwe Films?
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-white/60 font-body text-lg md:text-xl leading-relaxed max-w-md pt-4"
+            >
+              Traditional agencies are slow. Standard production is expensive. 
+              We've built a new model that prioritizes your speed without sacrificing 
+              an ounce of cinematic quality.
+            </motion.p>
+          </div>
+
+          {/* Right Side: Reasons (Compact Cards) */}
+          <div className="lg:col-span-7">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                { 
+                  title: "Quality + Speed", 
+                  desc: "Cinematic grade visuals delivered in days, not weeks. No compromises." 
+                },
+                { 
+                  title: "AI + Human Eye", 
+                  desc: "Advanced generative workflows directed by world-class cinematic intent." 
+                },
+                { 
+                  title: "ROI Focused", 
+                  desc: "Every cut and frame is engineered to hold attention and convert viewers." 
+                },
+                { 
+                  title: "Scalable Content", 
+                  desc: "One production, multi-format assets for every platform your brand lives on." 
+                }
+              ].map((item, i) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="liquid-glass border border-white/5 rounded-2xl p-8 group hover:border-white/20 transition-all duration-500"
+                >
+                  <h3 className="text-xl md:text-2xl font-heading italic text-white mb-3 group-hover:text-white transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-white/40 font-body text-xs md:text-sm leading-relaxed group-hover:text-white/60 transition-colors">
+                    {item.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+        </div>
       </section>
 
       <CtaFooter />
