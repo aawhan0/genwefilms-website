@@ -47,16 +47,16 @@ export default function Contact() {
         {/* Info Section */}
         <section className="py-24 border-t border-white/5 bg-white/[0.01]">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="flex flex-wrap justify-center gap-12 md:gap-32">
-              <div className="flex flex-col gap-2 italic">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 max-w-4xl mx-auto text-center md:text-left">
+              <div className="flex flex-col gap-2 italic items-center md:items-start">
                 <span className="text-white/40 text-xs uppercase tracking-widest not-italic">Presence</span>
                 <span className="text-xl md:text-2xl font-heading">Global</span>
               </div>
-              <div className="flex flex-col gap-2 italic">
+              <div className="flex flex-col gap-2 italic items-center md:items-start">
                 <span className="text-white/40 text-xs uppercase tracking-widest not-italic">Direct</span>
                 <span className="text-xl md:text-2xl font-heading">Contact@Genwefilms.com</span>
               </div>
-              <div className="flex flex-col gap-2 italic">
+              <div className="flex flex-col gap-2 italic items-center md:items-start">
                 <span className="text-white/40 text-xs uppercase tracking-widest not-italic">Updates</span>
                 <span className="text-xl md:text-2xl font-heading">@genwefilms</span>
               </div>

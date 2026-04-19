@@ -56,13 +56,15 @@ export default function ContactForm() {
         "MR0_OcrtTuEDf6y2b"
       );
 
-      // ✅ 3. Send auto-reply to USER
+      // ✅ 3. Send auto-reply to USER (Disabled to save EmailJS credits)
+      /*
       await emailjs.send(
         "service_genwefilms",
         "template_4k2tabe", // your auto reply template
         data,
         "MR0_OcrtTuEDf6y2b"
       );
+      */
 
       setSubmitted(true);
       e.target.reset();

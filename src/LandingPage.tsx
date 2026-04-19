@@ -21,8 +21,9 @@ export default function LandingPage() {
         This is where the grain/noise effect is applied to the landing page.
         The Noise component renders an SVG filter overlay that sits on top 
         of the background to create a cinematic, textured film grain look.
+        (Currently commented out as requested)
       */}
-      <Noise/>
+      {/* <Noise/> */}
 
       <Navbar />
 
