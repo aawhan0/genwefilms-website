@@ -8,7 +8,7 @@ import Navbar from "./components/Navbar";
 import Noise from "./components/Noise";
 
 const Divider = () => (
-  <div className="w-full flex justify-center py-8 md:py-16">
+  <div className="w-full flex justify-center py-4">
     <div className="h-px w-full max-w-5xl bg-gradient-to-r from-transparent via-white/10 to-transparent" />
   </div>
 );
@@ -17,6 +17,11 @@ export default function LandingPage() {
   return (
     <div className="bg-black min-h-screen selection:bg-white selection:text-black relative">
       
+      {/* 
+        This is where the grain/noise effect is applied to the landing page.
+        The Noise component renders an SVG filter overlay that sits on top 
+        of the background to create a cinematic, textured film grain look.
+      */}
       <Noise/>
 
       <Navbar />

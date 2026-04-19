@@ -21,7 +21,7 @@ const steps = [
 
 export default function MinimalProcess() {
   return (
-    <section className="relative px-4 md:px-6 py-20 md:py-28">
+    <section className="relative px-4 md:px-6 py-8 md:py-12">
       <div className="max-w-4xl mx-auto">
 
         {/* Divider label */}

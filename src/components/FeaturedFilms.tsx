@@ -50,7 +50,7 @@ function FeaturedCard({
       onClick={() => navigate(`/work/${project.slug}`)}
     >
       {/* Video Container */}
-      <div className="relative overflow-hidden rounded-2xl w-full bg-zinc-900 aspect-video md:aspect-[16/9]">
+      <div className="relative overflow-hidden rounded-2xl w-full bg-zinc-900 aspect-video md:aspect-[21/9] lg:aspect-video lg:max-h-[65vh]">
         <MuxPlayer
           ref={videoRef}
           playbackId={project.playbackId}
@@ -92,8 +92,8 @@ function FeaturedCard({
 
 export default function FeaturedFilms() {
   return (
-    <section id="featured-films" className="relative px-4 md:px-6 pt-4 pb-16 md:pb-24">
-      <div className="max-w-5xl mx-auto">
+    <section id="featured-films" className="relative px-4 md:px-6 pt-4 pb-8 md:pb-12">
+      <div className="max-w-4xl mx-auto">
 
         {/* Section label — minimal text label, no distracting lines */}
         <motion.div

@@ -83,7 +83,7 @@ function FilmGridCard({ project, index }: { project: Project; index: number }) {
 
 export default function FilmsGrid() {
   return (
-    <section className="relative px-4 md:px-6 pb-20 md:pb-32">
+    <section className="relative px-4 md:px-6 pb-8 md:pb-12">
       <div className="max-w-7xl mx-auto">
 
         {/* Section label */}

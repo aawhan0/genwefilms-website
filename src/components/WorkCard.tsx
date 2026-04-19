@@ -45,7 +45,7 @@ export default function WorkCard({ project }: WorkCardProps) {
       onClick={() => navigate(`/work/${project.slug}`)}
     >
       {/* 🎥 VIDEO CONTAINER */}
-      <div className="relative aspect-video overflow-hidden rounded-2xl bg-zinc-900">
+      <div className="relative aspect-video overflow-hidden rounded-2xl bg-zinc-900 max-h-[45vh]">
         <MuxPlayer
           ref={videoRef}
           playbackId={project.playbackId}
@@ -73,7 +73,7 @@ export default function WorkCard({ project }: WorkCardProps) {
       </div>
 
       {/* 📝 TEXT BELOW */}
-      <div className="pt-6 md:pt-8 flex flex-col flex-grow">
+      <div className="pt-4 md:pt-5 flex flex-col flex-grow">
         <h3 className="text-white font-heading italic text-xl md:text-2xl mb-2 md:mb-3">
           {project.title}
         </h3>
