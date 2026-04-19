@@ -18,47 +18,48 @@ export default function Navbar() {
   return (
     <>
       <nav className="fixed top-4 left-0 right-0 z-50 px-4 md:px-8 lg:px-16 flex items-center justify-between pointer-events-none">
-        {/* 🔥 Glass background */}
-        <div className="absolute inset-0 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full mx-2 md:mx-4 lg:mx-8 pointer-events-auto" />
 
-        {/* Content */}
+        {/* Glass background */}
+        <div className="absolute inset-0 bg-white/[0.04] backdrop-blur-2xl border border-white/10 rounded-full mx-2 md:mx-4 lg:mx-8 pointer-events-auto" />
+
         <div className="relative w-full flex items-center justify-between py-2 md:py-3 px-4 md:px-6 pointer-events-auto">
-          {/* Left: Logo */}
+
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <img src={logo} alt="Genwe Films Logo" className="h-6 md:h-8 object-contain" />
             <span className="text-white font-heading italic text-lg md:text-xl tracking-tight">
-              Genwe Films
+              Genwe
             </span>
           </Link>
 
-
-          <div className="hidden md:flex items-center rounded-full px-1.5 py-1 max-w-fit backdrop-blur-xl bg-black/30 border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className="px-4 py-2 text-sm font-medium text-white/80 font-body hover:text-white transition-colors"
+                className="text-sm tracking-wide text-white/70 hover:text-white transition-colors duration-300 font-body"
               >
                 {link.name}
               </Link>
             ))}
           </div>
 
+          {/* CTA + Mobile */}
+          <div className="flex items-center gap-3">
 
-          {/* Right: CTA + Mobile Menu Toggle */}
-          <div className="flex items-center gap-2 md:gap-4">
             <Link to="/contact#contact-form">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-black rounded-full px-4 md:px-5 py-1.5 md:py-2 text-xs md:text-sm font-semibold flex items-center gap-1.5"
+                className="border border-white/20 text-white rounded-full px-4 md:px-5 py-1.5 md:py-2 text-xs md:text-sm font-medium flex items-center gap-1.5 hover:bg-white hover:text-black transition-all duration-300"
               >
-                <span className="hidden xs:block">Get Started</span>
-                <span className="xs:hidden">Get Started</span>
+                Get in Touch
                 <ArrowUpRight className="w-3 md:w-4 h-3 md:h-4" />
               </motion.button>
             </Link>
 
+            {/* Mobile toggle */}
             <button
               className="md:hidden text-white p-1"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -66,30 +67,42 @@ export default function Navbar() {
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
+
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* 🔥 MOBILE MENU (UPGRADED) */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-x-4 top-24 z-40 md:hidden bg-black/90 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 flex flex-col gap-6"
+            initial={{ opacity: 0, y: -20, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.98 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed inset-x-4 top-24 z-40 md:hidden bg-black/95 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 flex flex-col gap-6"
           >
             {navLinks.map((link) => (
-              <Link
+              <motion.div
                 key={link.name}
-                to={link.path}
-                className="text-2xl font-heading italic text-white/90 hover:text-white transition-colors border-b border-white/5 pb-4"
-                onClick={() => setIsMenuOpen(false)}
+                whileHover={{ x: 10 }}
+                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                className="group"
               >
-                {link.name}
-              </Link>
+                <Link
+                  to={link.path}
+                  className="flex items-center justify-between text-2xl font-heading italic text-white/80 hover:text-white transition-colors pb-4 border-b border-white/5 group-hover:border-white/20"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span>{link.name}</span>
+
+                  {/* Arrow appears on hover */}
+                  <span className="opacity-0 group-hover:opacity-100 transition duration-300 text-white/40">
+                    →
+                  </span>
+                </Link>
+              </motion.div>
             ))}
           </motion.div>
-
         )}
       </AnimatePresence>
     </>

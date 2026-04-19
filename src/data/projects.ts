@@ -12,7 +12,7 @@ export const projects: Project[] = [
     slug: "cord",
     title: "Cord",
     description:
-      "A conceptual brand film exploring sustainability and the intricate threads that connect us to nature through poetic visuals.",
+      "A conceptual brand film exploring sustainability through poetic visuals, crafted using AI-driven storytelling.",
     type: "Conceptual Brand Film",
     playbackId: "xAIeg5qe1k4z3A6bKmQ2oo3inamQv1IwYgMm00JVVQbE",
     featured: true,
@@ -21,7 +21,7 @@ export const projects: Project[] = [
     slug: "aashirvaad-atta",
     title: "Aashirvaad Atta",
     description:
-      "Bringing the warmth of home and the quality of tradition to life in this premium product advertisement.",
+      "A premium product film blending emotion and realism, powered by AI to bring everyday moments to life.",
     type: "Product Advertisement",
     playbackId: "NZc7bFYTfzQBdjcmlldI9nEmfosHUGZDsg7R48BCvEo",
     featured: true,
@@ -30,7 +30,7 @@ export const projects: Project[] = [
     slug: "kia-himalayas",
     title: "Kia in Himalayas",
     description:
-      "A high-octane CGI advertisement film featuring Kia's performance across the rugged and majestic Himalayan terrain.",
+      "A high-impact CGI-driven film showcasing performance and scale, created using AI-enhanced production workflows.",
     type: "CGI Advertisement",
     playbackId: "l5Jei2fpnkXJWTcL8ypUc10201vgDLZG00p01BHfe3IGikg",
     featured: true,
@@ -39,7 +39,7 @@ export const projects: Project[] = [
     slug: "tata-sierra",
     title: "Tata Sierra",
     description:
-      "A cinematic brand film for the legendary Tata Sierra, capturing its spirit of adventure and timeless design.",
+      "A cinematic revival of an iconic SUV, blending nostalgia with modern storytelling powered by AI.",
     type: "Brand Film",
     playbackId: "Hf00KqtzPVmF7hYxvScGZ00orMFM28YTQB01L71LW3aAV4",
   },
@@ -47,7 +47,7 @@ export const projects: Project[] = [
     slug: "royal-enfield",
     title: "Royal Enfield",
     description:
-      "Exploring the raw power and heritage of Royal Enfield through dynamic visuals and soulful storytelling.",
+      "A raw and immersive brand film capturing heritage and power through AI-enhanced cinematic visuals.",
     type: "Brand Film",
     playbackId: "eocxI16G1GZhTHHUetrbsQ00ywJw01Gpx9wcv02NcsYipA",
   },
@@ -55,7 +55,7 @@ export const projects: Project[] = [
     slug: "tanishq-jewellery",
     title: "Tanishq Jewellery",
     description:
-      "A conceptual film showcasing the elegance and craftsmanship of Tanishq's exquisite jewellery collections.",
+      "An elegant concept film highlighting craftsmanship and luxury, brought to life with AI-driven precision.",
     type: "Conceptual Film",
     playbackId: "5EyRKtnKOnVwW5CfuDYs00IaL02FXkGfR0294jFdp578KE",
   },
@@ -63,7 +63,7 @@ export const projects: Project[] = [
     slug: "dogs-years",
     title: "Dog's Years",
     description:
-      "An emotional short film exploring the deep bond between humans and their canine companions.",
+      "An emotional short film exploring human-animal bonds, enhanced with AI-led visual storytelling.",
     type: "Short Film",
     playbackId: "7u9u4jjg00wlAUZm1H8cHhMgEZgI8vrJ5zfM5Z02VP0102s",
   },
@@ -71,7 +71,7 @@ export const projects: Project[] = [
     slug: "vedica-water",
     title: "Vedica Spring Water",
     description:
-      "Capturing the purity and serenity of the Himalayas in this product film for Vedica Himalayan Spring Water.",
+      "A serene product film capturing purity and nature, crafted using AI-powered cinematic workflows.",
     type: "Product Film",
     playbackId: "5Wtwu02L00K6GBKdwbyHaQmHTKoatewmlO24rcGbxJDcY",
   },
@@ -79,7 +79,7 @@ export const projects: Project[] = [
     slug: "film-bspoke",
     title: "Film B'spoke",
     description:
-      "A bespoke visual journey tailored to showcase unique perspectives and artistic expression through cinematic lenses.",
+      "A bespoke cinematic experience tailored for unique brand narratives, built with AI-driven production.",
     type: "Brand Film",
     playbackId: "YSXAPz8MwiI3b97NOHJw4otR2clHpmLAzk702SahB1WE",
   },

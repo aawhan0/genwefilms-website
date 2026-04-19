@@ -17,42 +17,39 @@ export default function LandingPage() {
   return (
     <div className="bg-black min-h-screen selection:bg-white selection:text-black relative">
       
-      {/* 
-        This is where the grain/noise effect is applied to the landing page.
-        The Noise component renders an SVG filter overlay that sits on top 
-        of the background to create a cinematic, textured film grain look.
-        (Currently commented out as requested)
-      */}
-      {/* <Noise/> */}
+      {/* Noise overlay (optional) */}
+      {/* <Noise /> */}
 
       <Navbar />
 
       <main>
-        {/* 1. HERO — Full-screen showreel */}
+        {/* 1. HERO */}
         <Hero />
 
-        {/* 2. FEATURED FILMS — High priority, visually dominant */}
+        {/* 2. FEATURED FILMS */}
         <FeaturedFilms />
 
         <Divider />
 
-        {/* 3. ALL FILMS GRID — Remaining work */}
+        {/* 3. ALL FILMS */}
         <FilmsGrid />
 
         <Divider />
 
-        {/* 4. MINIMAL PROCESS — 3 steps, clean */}
-        <MinimalProcess />
-
-        <Divider />
-
-        {/* 5. SERVICES — Icons only, low emphasis */}
+        {/* 4. SERVICES (moved up) */}
         <CompactServices />
 
         <Divider />
 
-        {/* 6. CONTACT — Simple CTA + footer */}
-        <CtaFooter />
+        {/* 5. PROCESS (after services) */}
+        <MinimalProcess />
+
+        <Divider />
+
+        {/* 6. CTA + FOOTER (with contact id for scroll) */}
+        <div id="contact">
+          <CtaFooter />
+        </div>
       </main>
 
     </div>

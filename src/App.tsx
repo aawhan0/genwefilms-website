@@ -6,6 +6,8 @@ import Services from "./pages/Services";
 import Work from "./pages/Work";
 import Process from "./pages/Process";
 import Contact from "./pages/Contact";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 
 export default function App() {
   return (
@@ -18,6 +20,8 @@ export default function App() {
         <Route path="/process" element={<Process />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/work/:slug" element={<ProjectPage />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
       </Routes>
     </BrowserRouter>
   );

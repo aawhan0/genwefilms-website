@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function CtaFooter() {
   return (
-    <section className="relative px-4 md:px-6 pt-8 md:pt-16 pb-10">
+    <section className="relative px-4 md:px-6 pt-12 md:pt-20 pb-10">
       <div className="max-w-5xl mx-auto">
 
         {/* CTA Block */}
@@ -16,11 +16,11 @@ export default function CtaFooter() {
           className="liquid-glass rounded-[2rem] md:rounded-[3rem] p-10 md:p-20 text-center flex flex-col items-center gap-6 md:gap-8"
         >
           <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-heading italic text-white leading-[0.9] tracking-tight">
-            Let's work together.
+            Let’s create something unforgettable.
           </h2>
 
           <p className="text-white/50 font-body font-light text-base md:text-lg max-w-xl leading-relaxed">
-            Tell us what you're building. We'll show you what's possible.
+            AI-powered brand films designed to capture attention and scale storytelling.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-2">
@@ -31,9 +31,10 @@ export default function CtaFooter() {
               Start a Project
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
+
             <a
               href="mailto:contact@genwefilms.com"
-              className="w-full sm:w-auto liquid-glass-strong rounded-full px-8 md:px-10 py-3 md:py-4 text-white/80 font-medium text-sm md:text-base hover:text-white transition-colors flex items-center justify-center"
+              className="w-full sm:w-auto border border-white/20 rounded-full px-8 md:px-10 py-3 md:py-4 text-white/70 font-medium text-sm md:text-base hover:text-white hover:border-white/40 transition-all flex items-center justify-center"
             >
               contact@genwefilms.com
             </a>
@@ -42,19 +43,34 @@ export default function CtaFooter() {
 
         {/* Footer Bar */}
         <div className="mt-10 md:mt-14 pt-6 border-t border-white/8 flex flex-col md:flex-row items-center justify-between gap-4">
+
           <div className="text-white/30 text-[10px] md:text-xs font-body tracking-wider uppercase text-center md:text-left">
             © 2026 Genwe Films. All rights reserved.
           </div>
+
           <div className="flex items-center gap-6 md:gap-8">
-            {["Privacy", "Terms", "Contact"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="text-white/30 text-[10px] md:text-xs font-body tracking-wider uppercase hover:text-white/60 transition-colors"
-              >
-                {item}
-              </a>
-            ))}
+
+            <Link
+              to="/privacy"
+              className="text-white/30 text-[10px] md:text-xs font-body tracking-wider uppercase hover:text-white/60 transition-colors"
+            >
+              Privacy
+            </Link>
+
+            <Link
+              to="/terms"
+              className="text-white/30 text-[10px] md:text-xs font-body tracking-wider uppercase hover:text-white/60 transition-colors"
+            >
+              Terms
+            </Link>
+
+            <a
+              href="#contact"
+              className="text-white/30 text-[10px] md:text-xs font-body tracking-wider uppercase hover:text-white/60 transition-colors"
+            >
+              Contact
+            </a>
+
           </div>
         </div>
 
