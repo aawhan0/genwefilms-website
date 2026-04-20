@@ -52,7 +52,7 @@ function FeaturedCard({
       onClick={() => navigate(`/work/${project.slug}`)}
     >
       {/* Video */}
-      <div className="relative overflow-hidden rounded-2xl w-full bg-zinc-900 aspect-video md:aspect-[21/9] lg:aspect-video lg:max-h-[65vh]">
+      <div className="relative overflow-hidden rounded-2xl w-full bg-zinc-900 aspect-video lg:max-h-[65vh]">
         <MuxPlayer
           ref={videoRef}
           playbackId={project.playbackId}
@@ -69,11 +69,11 @@ function FeaturedCard({
         />
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition duration-500 z-10" />
 
         {/* Play Button */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 z-20">
-          <div className="liquid-glass-strong rounded-full w-20 h-20 flex items-center justify-center scale-75 group-hover:scale-100 transition-transform duration-500">
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500 z-20">
+          <div className="liquid-glass-strong rounded-full w-20 h-20 flex items-center justify-center scale-75 group-hover:scale-100 transition">
             <Play className="w-8 h-8 text-white fill-white ml-1" />
           </div>
         </div>
@@ -81,26 +81,26 @@ function FeaturedCard({
 
       {/* Text */}
       <div className="pt-6 md:pt-8 mt-auto">
-        {/* Type + AI tag */}
+        {/* Type */}
         <div className="flex items-center gap-3 mb-2">
-          <span className="text-white/50 text-[10px] md:text-xs tracking-[0.2em] uppercase font-body font-medium">
+          <span className="text-white/40 text-[10px] md:text-xs tracking-[0.25em] uppercase">
             {project.type}
           </span>
 
-          <span className="text-[9px] md:text-[10px] uppercase tracking-wider text-white/40 border border-white/10 px-2 py-0.5 rounded-full">
-            AI Film
+          <span className="text-[9px] uppercase tracking-wider text-white/30 border border-white/10 px-2 py-0.5 rounded-full">
+            AI Assisted
           </span>
         </div>
 
         {/* Title */}
-        <h3 className="text-3xl md:text-4xl lg:text-5xl font-heading italic text-white leading-tight font-semibold">
+        <h3 className="text-3xl md:text-4xl lg:text-5xl font-heading italic text-white leading-tight">
           {project.title}
         </h3>
 
         {/* Description */}
-        <p className="mt-3 text-white/50 text-sm md:text-base max-w-xl font-body leading-relaxed">
+        <p className="mt-3 text-white/50 text-sm md:text-base max-w-xl leading-relaxed">
           {project.description ||
-            "A cinematic brand film crafted using AI-driven production and storytelling."}
+            "A cinematic brand film designed to capture attention and communicate visually."}
         </p>
       </div>
     </motion.div>
@@ -111,23 +111,27 @@ export default function FeaturedFilms() {
   return (
     <section
       id="featured-films"
-      className="relative px-4 md:px-6 pt-4 pb-8 md:pb-12"
+      className="relative px-4 md:px-6 pt-10 md:pt-16 pb-10 md:pb-16"
     >
       <div className="max-w-4xl mx-auto">
 
-        {/* Label */}
+        {/* Section Intro */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="flex justify-center mb-10 md:mb-16"
+          className="text-center mb-12 md:mb-16 space-y-3"
         >
-          <span className="text-white/20 text-[10px] md:text-xs tracking-[0.4em] uppercase font-body font-medium">
-            Featured Work
+          <span className="text-white/20 text-[10px] md:text-xs tracking-[0.4em] uppercase">
+            Selected Films
           </span>
+
+          <p className="text-white/40 text-xs md:text-sm max-w-md mx-auto">
+            These are conceptual sample films created using AI-assisted production workflows.
+          </p>
         </motion.div>
 
-        {/* Only top 3 films */}
+        {/* Films */}
         <div className="flex flex-col gap-12 md:gap-24">
           {featuredProjects.slice(0, 3).map((project, i) => (
             <div key={project.slug} className="w-full">

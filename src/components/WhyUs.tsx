@@ -2,22 +2,36 @@ import Hls from "hls.js";
 import { motion } from "motion/react";
 import { useEffect, useRef } from "react";
 
-const reasons = [
+const comparison = [
   {
-    headline: "Quality, Speed, and Cost — Together",
-    body: "Most brands are forced to choose between cinematic quality, fast delivery, or budget. We deliver all three — by design, not compromise.",
+    label: "Production Cost",
+    traditional: "Extremely high budgets",
+    genwe: "Up to 80% lower cost",
   },
   {
-    headline: "Filmmaker's Eye. AI Efficiency.",
-    body: "Every frame is directed with intent. AI accelerates production, but creative decisions remain human — precise, controlled, and cinematic.",
+    label: "Production Time",
+    traditional: "Weeks or months",
+    genwe: "Delivered in days",
   },
   {
-    headline: "From Weeks to Days",
-    body: "What used to take six weeks of production now takes 7–10 days. Your brand moves when the moment matters — not after it's gone.",
+    label: "Experimentation",
+    traditional: "Limited due to cost",
+    genwe: "Multiple ads can be tested",
   },
   {
-    headline: "Built for Attention and Action",
-    body: "We don't just make films that look good. Every visual, cut, and sound is engineered to hold attention — and convert it.",
+    label: "Flexibility",
+    traditional: "Difficult to change concepts",
+    genwe: "Fast iteration & revisions",
+  },
+  {
+    label: "Content Output",
+    traditional: "1–2 ads per campaign",
+    genwe: "Multiple ads per campaign",
+  },
+  {
+    label: "Marketing Speed",
+    traditional: "Slow campaign launches",
+    genwe: "Rapid campaign deployment",
   },
 ];
 
@@ -28,7 +42,8 @@ export default function WhyUs() {
     const video = videoRef.current;
     if (!video) return;
 
-    const hlsUrl = "https://stream.mux.com/NcU3HlHeF7CUL86azTTzpy3Tlb00d6iF3BmCdFslMJYM.m3u8";
+    const hlsUrl =
+      "https://stream.mux.com/NcU3HlHeF7CUL86azTTzpy3Tlb00d6iF3BmCdFslMJYM.m3u8";
 
     if (Hls.isSupported()) {
       const hls = new Hls();
@@ -40,7 +55,8 @@ export default function WhyUs() {
   }, []);
 
   return (
-    <section className="relative min-h-[600px] md:min-h-[800px] flex items-center justify-center overflow-hidden py-24 md:py-32 px-4 md:px-6">
+    <section className="relative py-28 md:py-36 px-4 md:px-6 overflow-hidden">
+
       {/* Background Video */}
       <div className="bg-video-container pointer-events-none">
         <video
@@ -49,51 +65,69 @@ export default function WhyUs() {
           loop
           muted
           playsInline
-          className="bg-video saturate-0 opacity-40"
+          className="bg-video saturate-0 opacity-40 scale-105"
         />
       </div>
 
-
       {/* Overlays */}
-      <div className="absolute inset-0 bg-black/30" />
-      <div className="absolute top-0 left-0 right-0 h-[150px] md:h-[200px] bg-gradient-to-b from-black to-transparent" />
-      <div
-        className="absolute bottom-0 left-0 w-full h-[200px] md:h-[250px]"
-        style={{
-          background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%)",
-        }}
-      />
+      <div className="absolute inset-0 bg-black/60" />
 
+      {/* Content */}
+      <div className="relative z-10 max-w-6xl mx-auto">
 
-      {/* Content Card */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="relative z-10 liquid-glass rounded-[2rem] md:rounded-[3rem] p-8 md:p-20 max-w-7xl w-full"
-      >
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-16">
-          {reasons.map((reason, i) => (
-            <motion.div
-              key={reason.headline}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="space-y-4 md:space-y-6"
-            >
-              <h4 className="text-xl md:text-3xl font-heading italic text-white leading-tight">
-                {reason.headline}
-              </h4>
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-14 md:mb-20"
+        >
+          <h2 className="text-3xl md:text-5xl font-heading italic text-white mb-4">
+            A better way to produce brand films
+          </h2>
 
-              <p className="text-white/70 font-body font-light text-sm md:text-base leading-relaxed">
-                {reason.body}
-              </p>
-            </motion.div>
+          <p className="text-white/50 max-w-xl mx-auto text-sm md:text-base">
+            We combine filmmaking craft with AI efficiency.
+          </p>
+        </motion.div>
+
+        {/* Table */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/10">
+
+          {/* Header Row */}
+          <div className="hidden md:block" />
+          <div className="text-center text-white/40 text-xs uppercase tracking-wider py-4">
+            Traditional
+          </div>
+          <div className="text-center text-green-400 text-xs uppercase tracking-wider py-4">
+            GenWe
+          </div>
+
+          {/* Rows */}
+          {comparison.map((item, i) => (
+            <>
+              {/* Label */}
+              <div className="bg-black/40 px-4 py-5 text-white/40 text-sm">
+                {item.label}
+              </div>
+
+              {/* Traditional */}
+              <div className="bg-black/30 px-4 py-5 text-white/50 text-sm">
+                {item.traditional}
+              </div>
+
+              {/* GenWe (highlight) */}
+              <div className="bg-[#0f1a12] px-4 py-5 text-white text-sm relative">
+                <span className="relative z-10">{item.genwe}</span>
+
+                {/* Glow */}
+                <div className="absolute inset-0 bg-green-400/10 blur-xl opacity-40" />
+              </div>
+            </>
           ))}
-        </div>
-      </motion.div>
-    </section>
 
+        </div>
+      </div>
+    </section>
   );
 }

@@ -13,31 +13,55 @@ export default function CtaFooter() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="liquid-glass rounded-[2rem] md:rounded-[3rem] p-10 md:p-20 text-center flex flex-col items-center gap-6 md:gap-8"
+
+          onMouseMove={(e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            e.currentTarget.style.setProperty("--x", `${x}px`);
+            e.currentTarget.style.setProperty("--y", `${y}px`);
+          }}
+
+          className="relative group overflow-hidden liquid-glass rounded-[2rem] md:rounded-[3rem] p-10 md:p-20 text-center flex flex-col items-center gap-6 md:gap-8"
         >
-          <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-heading italic text-white leading-[0.9] tracking-tight">
-            Let’s create something unforgettable.
-          </h2>
 
-          <p className="text-white/50 font-body font-light text-base md:text-lg max-w-xl leading-relaxed">
-            AI-powered brand films designed to capture attention and scale storytelling.
-          </p>
+          {/* 🔥 Glow Layer */}
+          <div
+            className="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition duration-500"
+            style={{
+              background:
+                "radial-gradient(700px circle at var(--x) var(--y), rgba(255,255,255,0.08), transparent 75%)",
+            }}
+          />
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 mt-2">
-            <Link
-              to="/contact#contact-form"
-              className="w-full sm:w-auto bg-white text-black rounded-full px-8 md:px-10 py-3 md:py-4 font-medium text-sm md:text-base hover:bg-white/90 transition-colors flex items-center justify-center gap-2 group"
-            >
-              Start a Project
-              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </Link>
+          {/* Content */}
+          <div className="relative z-20 flex flex-col items-center gap-6 md:gap-8">
 
-            <a
-              href="mailto:contact@genwefilms.com"
-              className="w-full sm:w-auto border border-white/20 rounded-full px-8 md:px-10 py-3 md:py-4 text-white/70 font-medium text-sm md:text-base hover:text-white hover:border-white/40 transition-all flex items-center justify-center"
-            >
-              contact@genwefilms.com
-            </a>
+            <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-heading italic text-white leading-[0.9] tracking-tight">
+              Let’s create something unforgettable.
+            </h2>
+
+            <p className="text-white/50 font-body font-light text-base md:text-lg max-w-xl leading-relaxed">
+              AI-powered brand films designed to capture attention and scale storytelling.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center gap-4 mt-2">
+              <Link
+                to="/contact#contact-form"
+                className="w-full sm:w-auto bg-white text-black rounded-full px-8 md:px-10 py-3 md:py-4 font-medium text-sm md:text-base hover:bg-white/90 transition-colors flex items-center justify-center gap-2 group"
+              >
+                Start a Project
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </Link>
+
+              <a
+                href="mailto:contact@genwefilms.com"
+                className="w-full sm:w-auto border border-white/20 rounded-full px-8 md:px-10 py-3 md:py-4 text-white/70 font-medium text-sm md:text-base hover:text-white hover:border-white/40 transition-all flex items-center justify-center"
+              >
+                contact@genwefilms.com
+              </a>
+            </div>
+
           </div>
         </motion.div>
 

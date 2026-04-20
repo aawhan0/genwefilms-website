@@ -2,14 +2,14 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.png";
+import logo from "../assets/logodraft.png";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Services", path: "/services" },
+    { name: "AI Studio", path: "/ai-studio" },
     { name: "Work", path: "/work" },
     { name: "Process", path: "/process" },
     { name: "Contact", path: "/contact" },
@@ -28,7 +28,7 @@ export default function Navbar() {
           <Link to="/" className="flex items-center gap-2">
             <img src={logo} alt="Genwe Films Logo" className="h-6 md:h-8 object-contain" />
             <span className="text-white font-heading italic text-lg md:text-xl tracking-tight">
-              Genwe
+              {/* Genwe */}
             </span>
           </Link>
 
