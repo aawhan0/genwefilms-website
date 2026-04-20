@@ -2,7 +2,7 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logodraft.png";
+import logo from "../assets/logodraft1.png";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,13 +10,12 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "AI Studio", path: "/ai-studio" },
-    { name: "Work", path: "/work" },
-    { name: "Process", path: "/process" },
     { name: "Contact", path: "/contact" },
   ];
 
   return (
     <>
+      {/* NAVBAR */}
       <nav className="fixed top-4 left-0 right-0 z-50 px-4 md:px-8 lg:px-16 flex items-center justify-between pointer-events-none">
 
         {/* Glass background */}
@@ -26,10 +25,7 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <img src={logo} alt="Genwe Films Logo" className="h-6 md:h-8 object-contain" />
-            <span className="text-white font-heading italic text-lg md:text-xl tracking-tight">
-              {/* Genwe */}
-            </span>
+            <img src={logo} alt="Genwe Films Logo" className="h-5 md:h-6 opacity-90 object-contain" />
           </Link>
 
           {/* Desktop Nav */}
@@ -62,46 +58,74 @@ export default function Navbar() {
             {/* Mobile toggle */}
             <button
               className="md:hidden text-white p-1"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={() => setIsMenuOpen(true)}
             >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              <Menu className="w-6 h-6" />
             </button>
-          </div>
 
+          </div>
         </div>
       </nav>
 
-      {/* 🔥 MOBILE MENU (UPGRADED) */}
+      {/* 🔥 FULLSCREEN MOBILE MENU */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.98 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed inset-x-4 top-24 z-40 md:hidden bg-black/95 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 flex flex-col gap-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col justify-between px-6 py-10"
           >
-            {navLinks.map((link) => (
-              <motion.div
-                key={link.name}
-                whileHover={{ x: 10 }}
-                transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                className="group"
-              >
-                <Link
-                  to={link.path}
-                  className="flex items-center justify-between text-2xl font-heading italic text-white/80 hover:text-white transition-colors pb-4 border-b border-white/5 group-hover:border-white/20"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <span>{link.name}</span>
 
-                  {/* Arrow appears on hover */}
-                  <span className="opacity-0 group-hover:opacity-100 transition duration-300 text-white/40">
-                    →
-                  </span>
-                </Link>
-              </motion.div>
-            ))}
+            {/* TOP */}
+            <div className="flex items-center justify-between">
+              <span className="text-white font-heading italic text-xl">
+                Genwe
+              </span>
+
+              <button onClick={() => setIsMenuOpen(false)}>
+                <X className="w-7 h-7 text-white" />
+              </button>
+            </div>
+
+            {/* NAV LINKS */}
+            <div className="flex flex-col gap-8 mt-16">
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <Link
+                    to={link.path}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-4xl md:text-5xl font-heading italic text-white tracking-tight"
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* FOOTER */}
+            <div className="flex flex-col gap-4">
+
+              <Link
+                to="/contact#contact-form"
+                onClick={() => setIsMenuOpen(false)}
+                className="w-full border border-white/20 text-white rounded-full px-6 py-3 text-center text-sm hover:bg-white hover:text-black transition-all"
+              >
+                Start a Project
+              </Link>
+
+              <span className="text-white/30 text-xs tracking-wider uppercase">
+                contact@genwefilms.com
+              </span>
+
+            </div>
+
           </motion.div>
         )}
       </AnimatePresence>

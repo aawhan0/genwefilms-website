@@ -310,3 +310,78 @@ mux-player::part(media-controller) {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
 }
+
+
+
+
+
+
+
+
+
+
+/* ===== REQUIRED FOR AI STUDIO ===== */
+
+/* Background video container */
+.bg-video-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Mux player fit */
+mux-player.bg-video {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+mux-player.bg-video::part(video),
+mux-player.bg-video::part(media-controller) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Marquee */
+.marquee {
+  overflow: hidden;
+}
+
+.marquee-inner {
+  display: flex;
+  gap: 120px;
+  width: max-content;
+  animation: marqueeSmooth 120s linear infinite;
+}
+
+.marquee-inner span {
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+
+@keyframes marqueeSmooth {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Glass */
+.liquid-glass {
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(6px);
+}
+
+.liquid-glass-strong {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
+}
