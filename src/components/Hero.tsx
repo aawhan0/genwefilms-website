@@ -1,11 +1,24 @@
 import { ChevronDown } from "lucide-react";
-import { motion } from "motion/react";
-import { useState } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef, useState, useEffect } from "react";
 import MuxPlayer from "@mux/mux-player-react";
-import BlurText from "./BlurText";
 
 export default function Hero() {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const containerRef = useRef(null);
+  const [videoReady, setVideoReady] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setVideoReady(true), 1100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const yVideo = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const yContent = useTransform(scrollYProgress, [0, 1], [0, -40]);
 
   const scrollToFilms = () => {
     const el = document.getElementById("featured-films");
@@ -13,102 +26,139 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
-
+    <section
+      ref={containerRef}
+      className="relative h-screen flex items-center justify-start overflow-hidden"
+    >
       {/* 🎥 Background */}
-      <div className="bg-video-container pointer-events-none">
+      <motion.div
+        style={{ y: yVideo }}
+        className="bg-video-container pointer-events-none"
+      >
         <MuxPlayer
-          playbackId="IBuQ9k5NTE701f6lWm4k7WrGCWrn6iH7c902c2w374oPw"
+          playbackId="ri700145U7jN7kmhKRiAbVt2qk6jM8cezZvupUKAzfhI"
           autoPlay
           muted
           loop
           playsInline
-          preload="auto"
-          streamType="on-demand"
-          poster={`https://image.mux.com/IBuQ9k5NTE701f6lWm4k7WrGCWrn6iH7c902c2w374oPw/thumbnail.jpg?time=0.1`}
-          className="bg-video"
+          onLoadedMetadata={() => setVideoReady(true)}
+          poster="https://image.mux.com/ri700145U7jN7kmhKRiAbVt2qk6jM8cezZvupUKAzfhI/thumbnail.jpg"
+          className="bg-video scale-110"
         />
-      </div>
+      </motion.div>
 
       {/* 🎬 Overlays */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle,transparent_45%,rgba(0,0,0,0.6))]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.04),transparent_60%)]" />
-        <div className="absolute bottom-0 left-0 w-full h-[40%] bg-gradient-to-b from-transparent to-black" />
+
+        {/* 🖤 TRUE BLACK INITIAL */}
+        {!videoReady && (
+          <div className="absolute inset-0 z-[20] bg-black" />
+        )}
+
+        {/* 🎬 REVEAL */}
+        <motion.div
+          initial={{ x: "0%" }}
+          animate={{ x: videoReady ? "-100%" : "0%" }}
+          transition={{
+            duration: 0.9,
+            ease: [0.77, 0, 0.175, 1],
+          }}
+          className="absolute inset-0 z-[15] pointer-events-none"
+        >
+          <div className="absolute inset-0 bg-black" />
+          <div className="absolute right-0 top-0 h-full w-[20%] bg-gradient-to-r from-black to-transparent" />
+          <div className="absolute right-0 top-0 h-full w-[2px] bg-white/20 blur-sm" />
+        </motion.div>
+
+        {/* 🌫️ LIGHTING */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-b from-transparent to-black/70" />
+
+        {/* 🎯 LEFT VIGNETTE */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute left-0 top-0 h-full w-[30%] bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
+        </div>
       </div>
 
       {/* 🎯 Content */}
-      <div className="relative z-10 flex flex-col items-center text-center px-6">
-
-        {/* 🔥 HEADLINE */}
-        <BlurText
-          text={"Films That Make\nBrands Unforgettable"}
-          className="
-            text-3xl sm:text-4xl md:text-6xl lg:text-[5.6rem]
-            font-heading italic
-            text-white
-            leading-[0.9]
-            tracking-tight
-            text-center
-            max-w-[92%] sm:max-w-[85%] md:max-w-4xl
-            drop-shadow-[0_4px_30px_rgba(0,0,0,0.5)]
-          "
-        />
-
-        {/* 🔥 LABEL */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="mt-4 flex justify-center px-4"
+      <motion.div
+        style={{ y: yContent }}
+        className="relative z-10 px-6 md:px-12 lg:px-20 max-w-[680px] md:max-w-[760px]"
+      >
+        {/* Label */}
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-white/40 text-[10px] tracking-[0.4em] uppercase mb-6 block"
         >
-          <div className="max-w-fit px-3 py-1 rounded-full bg-white/8 backdrop-blur-md border border-white/10">
-            <p className="
-              text-white/60 
-              text-[8px] sm:text-[9px] md:text-[10px]
-              tracking-[0.2em] sm:tracking-[0.25em]
-              uppercase font-body text-center
-              leading-tight
-            ">
-              High-impact sample films powered by AI
-            </p>
-          </div>
-        </motion.div>
+          Genwe Films
+        </motion.span>
 
-      </div>
-
-      {/* 🤝 Brands */}
-      <div className="absolute bottom-24 md:bottom-28 left-0 right-0 z-10 px-6">
-        <div className="flex flex-col items-center gap-4">
-
-          <span className="text-white/30 text-[9px] md:text-[10px] tracking-[0.35em] uppercase font-body">
-            Crafted for brands like
-          </span>
-
-          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-14 opacity-30">
-            {["Mango", "Zepto", "boAt", "Mamaearth", "Nykaa"].map((brand) => (
-              <span
-                key={brand}
-                className="text-base md:text-xl font-heading italic text-white tracking-tight"
-              >
-                {brand}
-              </span>
-            ))}
-          </div>
-
+        {/* Headline */}
+        <div className="overflow-hidden">
+          <motion.h1
+            initial={{ y: "120%", opacity: 0 }}
+            animate={{ y: "0%", opacity: 1 }}
+            transition={{
+              duration: 1,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="
+              text-[2.8rem] sm:text-5xl md:text-6xl lg:text-[5.8rem]
+              font-heading italic
+              text-white
+              leading-[1.05]
+              tracking-tight
+            "
+          >
+            We craft films
+            <br />
+            that stay.
+          </motion.h1>
         </div>
-      </div>
+
+        {/* 🔥 STAGGERED TEXT BLOCK */}
+        <div className="mt-10">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.6 }}
+            className="
+              text-white/70
+              text-sm md:text-base
+              tracking-[0.28em]
+              uppercase
+            "
+          >
+            Cinematic brand storytelling
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.95, duration: 0.6 }}
+            className="
+              text-white/40
+              text-[10px]
+              tracking-[0.3em]
+              uppercase
+              mt-2
+            "
+          >
+            Powered by AI
+          </motion.p>
+        </div>
+      </motion.div>
 
       {/* ⬇️ CTA */}
       <motion.button
         onClick={scrollToFilms}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.4 }}
-        className="absolute bottom-8 z-10 flex flex-col items-center gap-1 group cursor-pointer"
+        transition={{ delay: 1.2 }}
+        className="absolute bottom-8 right-6 md:right-12 lg:right-20 z-10 flex flex-col items-center gap-1 group"
       >
-        <span className="text-white/50 text-[10px] tracking-[0.25em] uppercase font-body group-hover:text-white/80 transition-colors">
+        <span className="text-white/50 text-[10px] tracking-[0.25em] uppercase group-hover:text-white/80 transition">
           View Work
         </span>
 
@@ -116,10 +166,9 @@ export default function Hero() {
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <ChevronDown className="w-5 h-5 text-white/40 group-hover:text-white/70 transition-colors" />
+          <ChevronDown className="w-5 h-5 text-white/40 group-hover:text-white/70 transition" />
         </motion.div>
       </motion.button>
-
     </section>
   );
 }

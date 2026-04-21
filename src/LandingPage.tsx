@@ -1,11 +1,8 @@
 import CtaFooter from "./components/CtaFooter";
 import FeaturedFilms from "./components/FeaturedFilms";
-import FilmsGrid from "./components/FilmsGrid";
 import Hero from "./components/Hero";
-import MinimalProcess from "./components/MinimalProcess";
-import CompactServices from "./components/CompactServices";
 import Navbar from "./components/Navbar";
-import Noise from "./components/Noise";
+import WhyGenwe from "./components/WhyGenwe";
 
 const Divider = () => (
   <div className="w-full flex justify-center py-4">
@@ -17,36 +14,23 @@ export default function LandingPage() {
   return (
     <div className="bg-black min-h-screen selection:bg-white selection:text-black relative">
       
-      {/* Noise overlay (optional) */}
-      {/* <Noise /> */}
-
       <Navbar />
 
       <main>
-        {/* 1. HERO */}
+        {/* HERO */}
         <Hero />
 
-        {/* 2. FEATURED FILMS */}
+        {/* FEATURED FILMS (has its own background effect) */}
         <FeaturedFilms />
 
         <Divider />
 
-        {/* 3. ALL FILMS */}
-        <FilmsGrid />
+        {/* WHY GENWE */}
+        <WhyGenwe />
 
         <Divider />
 
-        {/* 4. SERVICES (moved up) */}
-        <CompactServices />
-
-        <Divider />
-
-        {/* 5. PROCESS (after services) */}
-        <MinimalProcess />
-
-        <Divider />
-
-        {/* 6. CTA + FOOTER (with contact id for scroll) */}
+        {/* CTA */}
         <div id="contact">
           <CtaFooter />
         </div>

@@ -15,7 +15,7 @@ export const projects: Project[] = [
       "A conceptual brand film exploring sustainability through poetic visuals, crafted using AI-driven storytelling.",
     type: "Conceptual Brand Film",
     playbackId: "xAIeg5qe1k4z3A6bKmQ2oo3inamQv1IwYgMm00JVVQbE",
-    featured: true,
+    featured: false,
   },
   {
     slug: "aashirvaad-atta",
@@ -24,7 +24,7 @@ export const projects: Project[] = [
       "A premium product film blending emotion and realism, powered by AI to bring everyday moments to life.",
     type: "Product Advertisement",
     playbackId: "NZc7bFYTfzQBdjcmlldI9nEmfosHUGZDsg7R48BCvEo",
-    featured: true,
+    featured: false,
   },
   {
     slug: "kia-himalayas",
@@ -33,8 +33,41 @@ export const projects: Project[] = [
       "A high-impact CGI-driven film showcasing performance and scale, created using AI-enhanced production workflows.",
     type: "CGI Advertisement",
     playbackId: "l5Jei2fpnkXJWTcL8ypUc10201vgDLZG00p01BHfe3IGikg",
+    featured: false,
+  },
+
+  // ✅ FEATURED PROJECTS
+
+  {
+    slug: "vedica-water",
+    title: "Vedica",
+    description:
+      "A serene cinematic film capturing purity, stillness, and the essence of untouched nature.",
+    type: "Cinematic Product Film",
+    playbackId: "5Wtwu02L00K6GBKdwbyHaQmHTKoatewmlO24rcGbxJDcY",
     featured: true,
   },
+  {
+    slug: "royal-enfield",
+    title: "Royal Enfield",
+    description:
+      "A raw cinematic journey through landscapes, capturing freedom, legacy, and timeless engineering.",
+    type: "Adventure Brand Film",
+    playbackId: "eocxI16G1GZhTHHUetrbsQ00ywJw01Gpx9wcv02NcsYipA",
+    featured: true,
+  },
+  {
+    slug: "tanishq-jewellery",
+    title: "Tanishq",
+    description:
+      "An emotional luxury film reflecting heritage, craftsmanship, and modern Indian identity.",
+    type: "Luxury Story Film",
+    playbackId: "5EyRKtnKOnVwW5CfuDYs00IaL02FXkGfR0294jFdp578KE",
+    featured: true,
+  },
+
+  // OTHER PROJECTS
+
   {
     slug: "tata-sierra",
     title: "Tata Sierra",
@@ -44,36 +77,12 @@ export const projects: Project[] = [
     playbackId: "Hf00KqtzPVmF7hYxvScGZ00orMFM28YTQB01L71LW3aAV4",
   },
   {
-    slug: "royal-enfield",
-    title: "Royal Enfield",
-    description:
-      "A raw and immersive brand film capturing heritage and power through AI-enhanced cinematic visuals.",
-    type: "Brand Film",
-    playbackId: "eocxI16G1GZhTHHUetrbsQ00ywJw01Gpx9wcv02NcsYipA",
-  },
-  {
-    slug: "tanishq-jewellery",
-    title: "Tanishq Jewellery",
-    description:
-      "An elegant concept film highlighting craftsmanship and luxury, brought to life with AI-driven precision.",
-    type: "Conceptual Film",
-    playbackId: "5EyRKtnKOnVwW5CfuDYs00IaL02FXkGfR0294jFdp578KE",
-  },
-  {
     slug: "dogs-years",
     title: "Dog's Years",
     description:
       "An emotional short film exploring human-animal bonds, enhanced with AI-led visual storytelling.",
     type: "Short Film",
     playbackId: "7u9u4jjg00wlAUZm1H8cHhMgEZgI8vrJ5zfM5Z02VP0102s",
-  },
-  {
-    slug: "vedica-water",
-    title: "Vedica Spring Water",
-    description:
-      "A serene product film capturing purity and nature, crafted using AI-powered cinematic workflows.",
-    type: "Product Film",
-    playbackId: "5Wtwu02L00K6GBKdwbyHaQmHTKoatewmlO24rcGbxJDcY",
   },
   {
     slug: "film-bspoke",
@@ -85,5 +94,11 @@ export const projects: Project[] = [
   },
 ];
 
-export const featuredProjects = projects.filter((p) => p.featured);
-export const gridProjects = projects;
+
+// ✅ THIS WAS MISSING → THIS FIXES YOUR ERROR
+export const featuredProjects: Project[] = projects.filter(
+  (p) => p.featured
+);
+
+// optional (if you use grid somewhere)
+export const gridProjects: Project[] = projects;

@@ -4,17 +4,42 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { featuredProjects } from "../data/projects";
 import MuxPlayer from "@mux/mux-player-react";
+import LiquidChrome from "./LiquidChrome";
 
-function FeaturedCard({
-  project,
-  index,
-}: {
-  project: typeof featuredProjects[0];
-  index: number;
-}) {
+function getBrandStyles(title: string) {
+  switch (title) {
+    case "Vedica":
+      return {
+        glow: "from-blue-400/40 via-cyan-300/10 to-transparent",
+        border: "border-blue-400/30",
+      };
+
+    case "Royal Enfield":
+      return {
+        glow: "from-orange-500/50 via-red-500/10 to-transparent",
+        border: "border-orange-400/30",
+      };
+
+    case "Tanishq":
+      return {
+        glow: "from-yellow-400/50 via-amber-200/10 to-transparent",
+        border: "border-yellow-300/30",
+      };
+
+    default:
+      return {
+        glow: "from-white/10 to-transparent",
+        border: "border-white/10",
+      };
+  }
+}
+
+function FeaturedCard({ project, index }: any) {
   const navigate = useNavigate();
   const videoRef = useRef<any>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+
+  const styles = getBrandStyles(project.title);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -40,68 +65,67 @@ function FeaturedCard({
   return (
     <motion.div
       ref={cardRef}
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{
-        duration: 0.7,
-        delay: index * 0.15,
-        ease: [0.21, 0.47, 0.32, 0.98],
-      }}
-      className="group cursor-pointer flex flex-col h-full"
+      transition={{ duration: 0.9, delay: index * 0.15 }}
+      className="group cursor-pointer flex flex-col"
       onClick={() => navigate(`/work/${project.slug}`)}
     >
-      {/* Video */}
-      <div className="relative overflow-hidden rounded-2xl w-full bg-zinc-900 aspect-video lg:max-h-[65vh]">
+      {/* 🎥 VIDEO CARD */}
+      <div className="relative rounded-[1.5rem] overflow-hidden aspect-video bg-zinc-900">
+
+        {/* 🔥 BASE BORDER */}
+        <div
+          className={`absolute inset-0 rounded-[1.5rem] border ${styles.border} opacity-60 group-hover:opacity-100 transition`}
+        />
+
+        {/* ✨ ANIMATED BORDER GLOW */}
+        <div className="absolute inset-0 rounded-[1.5rem] pointer-events-none opacity-0 group-hover:opacity-100 transition duration-700">
+          <div
+            className={`absolute inset-[-1px] rounded-[1.5rem] bg-gradient-to-r ${styles.glow} animate-pulse`}
+          />
+        </div>
+
+        {/* 🔥 BRAND GLOW */}
+        <div
+          className={`absolute inset-0 opacity-40 group-hover:opacity-100 transition duration-700 bg-gradient-to-r ${styles.glow}`}
+        />
+
+        {/* 🎬 VIDEO */}
         <MuxPlayer
           ref={videoRef}
           playbackId={project.playbackId}
           muted
           loop
           playsInline
-          preload="metadata"
-          streamType="on-demand"
           autoPlay={false}
-          {...({ controls: false } as any)}
-          style={{ pointerEvents: "none", objectFit: "cover" }}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105 z-0"
-          poster={`https://image.mux.com/${project.playbackId}/thumbnail.jpg?time=1`}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
         />
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition duration-500 z-10" />
+        {/* DARK OVERLAY */}
+        <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition" />
 
-        {/* Play Button */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500 z-20">
-          <div className="liquid-glass-strong rounded-full w-20 h-20 flex items-center justify-center scale-75 group-hover:scale-100 transition">
-            <Play className="w-8 h-8 text-white fill-white ml-1" />
+        {/* ▶ PLAY BUTTON */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+          <div className="liquid-glass-strong rounded-full w-20 h-20 flex items-center justify-center">
+            <Play className="w-8 h-8 text-white fill-white" />
           </div>
         </div>
       </div>
 
-      {/* Text */}
-      <div className="pt-6 md:pt-8 mt-auto">
-        {/* Type */}
-        <div className="flex items-center gap-3 mb-2">
-          <span className="text-white/40 text-[10px] md:text-xs tracking-[0.25em] uppercase">
-            {project.type}
-          </span>
+      {/* 🧠 TEXT */}
+      <div className="pt-6 space-y-2">
 
-          <span className="text-[9px] uppercase tracking-wider text-white/30 border border-white/10 px-2 py-0.5 rounded-full">
-            AI Assisted
-          </span>
-        </div>
-
-        {/* Title */}
-        <h3 className="text-3xl md:text-4xl lg:text-5xl font-heading italic text-white leading-tight">
+        {/* 🎬 TITLE */}
+        <h3 className="text-3xl md:text-4xl font-heading italic text-white leading-tight">
           {project.title}
         </h3>
 
-        {/* Description */}
-        <p className="mt-3 text-white/50 text-sm md:text-base max-w-xl leading-relaxed">
-          {project.description ||
-            "A cinematic brand film designed to capture attention and communicate visually."}
-        </p>
+        {/* ✨ LABEL */}
+        <div className="text-[10px] md:text-xs tracking-[0.45em] uppercase text-white/40 font-medium">
+          Made by Humans with AI
+        </div>
+
       </div>
     </motion.div>
   );
@@ -109,34 +133,44 @@ function FeaturedCard({
 
 export default function FeaturedFilms() {
   return (
-    <section
-      id="featured-films"
-      className="relative px-4 md:px-6 pt-10 md:pt-16 pb-10 md:pb-16"
-    >
-      <div className="max-w-4xl mx-auto">
+    <section className="relative overflow-hidden px-6 py-24">
 
-        {/* Section Intro */}
+      {/* 🔥 LIQUID CHROME BACKGROUND */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <LiquidChrome
+          baseColor={[0.06, 0.06, 0.08]}
+          speed={0.18}
+          amplitude={0.25}
+          frequencyX={2.2}
+          frequencyY={1.6}
+          interactive={true}
+          className="w-full h-full opacity-30"
+        />
+      </div>
+
+      {/* 🎬 CINEMATIC FADE */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black via-black/60 to-black pointer-events-none" />
+
+      {/* CONTENT */}
+      <div className="relative z-10 max-w-4xl mx-auto">
+
+        {/* 🎯 HEADING */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12 md:mb-16 space-y-3"
+          className="text-center mb-16"
         >
-          <span className="text-white/20 text-[10px] md:text-xs tracking-[0.4em] uppercase">
-            Selected Films
+          <span className="text-white/20 text-[10px] md:text-xs tracking-[0.45em] uppercase">
+            AI Conceptual Films
           </span>
-
-          <p className="text-white/40 text-xs md:text-sm max-w-md mx-auto">
-            These are conceptual sample films created using AI-assisted production workflows.
-          </p>
         </motion.div>
 
-        {/* Films */}
-        <div className="flex flex-col gap-12 md:gap-24">
-          {featuredProjects.slice(0, 3).map((project, i) => (
-            <div key={project.slug} className="w-full">
-              <FeaturedCard project={project} index={i} />
-            </div>
+        {/* 🎬 CARDS */}
+        <div className="flex flex-col gap-20">
+          {featuredProjects.slice(0, 3).map((p, i) => (
+            <FeaturedCard key={p.slug} project={p} index={i} />
           ))}
         </div>
 

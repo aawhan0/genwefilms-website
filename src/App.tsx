@@ -8,6 +8,7 @@ import Process from "./pages/Process";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import ServicePage from "./pages/ServicePage";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/work/:slug" element={<ProjectPage />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/ai-studio/:slug" element={<ServicePage />} />
       </Routes>
     </BrowserRouter>
   );
