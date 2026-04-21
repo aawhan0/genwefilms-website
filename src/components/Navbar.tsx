@@ -10,7 +10,7 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "AI Studio", path: "/ai-studio" },
-    { name: "Contact", path: "/contact" },
+    { name: "Connect", path: "/contact" },
   ];
 
   return (
@@ -50,7 +50,7 @@ export default function Navbar() {
                 whileTap={{ scale: 0.95 }}
                 className="border border-white/20 text-white rounded-full px-4 md:px-5 py-1.5 md:py-2 text-xs md:text-sm font-medium flex items-center gap-1.5 hover:bg-white hover:text-black transition-all duration-300"
               >
-                Get in Touch
+                Start your project
                 <ArrowUpRight className="w-3 md:w-4 h-3 md:h-4" />
               </motion.button>
             </Link>

@@ -1,104 +1,150 @@
 import { motion } from "motion/react";
+import DarkVeil from "./DarkVeil";
 
 const data = [
-  { label: "Production Time", traditional: "Weeks or months", genwe: "Delivered in days" },
-  { label: "Cost", traditional: "Extremely high budgets", genwe: "Up to 80% lower" },
-  { label: "Flexibility", traditional: "Hard to change concepts", genwe: "Fast iteration" },
-  { label: "Creative Testing", traditional: "Limited", genwe: "Multiple variations" },
-  { label: "Output", traditional: "1–2 ads", genwe: "Multiple ads" },
-  { label: "Deployment", traditional: "Slow", genwe: "Rapid" },
+  {
+    label: "Production Time",
+    traditional: "Weeks to months",
+    genwe: "Delivered within a week",
+  },
+  {
+    label: "Cost",
+    traditional: "Same budget = 1 film",
+    genwe: "Same budget = up to 12 films",
+  },
+  {
+    label: "Flexibility",
+    traditional: "Rigid once executed",
+    genwe: "Fast iteration cycles",
+  },
+  {
+    label: "Creative Testing",
+    traditional: "Limited exploration",
+    genwe: "Multiple variations",
+  },
+  {
+    label: "Deployment",
+    traditional: "Slow rollout",
+    genwe: "Rapid deployment",
+  },
 ];
 
 export default function WhyGenWe() {
   return (
-    <section className="relative py-40 px-6 md:px-12 max-w-6xl mx-auto overflow-hidden">
+    <section className="relative w-full overflow-hidden">
 
-      {/* TOP TEXT */}
-      <div className="text-center mb-20 space-y-6">
-        <span className="text-white/30 text-[10px] tracking-[0.5em] uppercase">
-          Why GenWe
-        </span>
-
-        <h2 className="text-5xl md:text-7xl font-heading italic leading-[0.95]">
-          Faster. Smarter.
-        </h2>
-      </div>
-
-      {/* TABLE */}
+      {/* 🌊 ENHANCED DARKVEIL (LESS STATIC) */}
       <motion.div
-        initial={{ opacity: 0, y: 40, scale: 0.98 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.9 }}
-        viewport={{ once: true }}
-        className="relative overflow-hidden liquid-glass rounded-[3rem] p-2 md:p-3"
+        className="absolute inset-0 w-full h-full z-0 pointer-events-none"
+        animate={{
+          scale: [1, 1.03, 1],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
       >
+        <DarkVeil
+          speed={0.45}          // 🔥 increased from 0.2
+          noiseIntensity={0.035} // 🔥 slightly richer
+          warpAmount={0.45}      // 🔥 more flow
+        />
+      </motion.div>
 
-        {/* SOFT CINEMATIC LIGHT */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.04),transparent_50%)] pointer-events-none" />
+      {/* 🧊 OVERLAY */}
+      <div className="absolute inset-0 bg-black/70 z-[1]" />
 
-        {/* GENWE LIGHT */}
-        <div className="absolute top-0 right-0 w-1/3 h-full 
-        bg-gradient-to-l from-green-500/10 via-green-500/5 to-transparent pointer-events-none" />
+      {/* CONTENT */}
+      <div className="relative z-10 py-28 px-4 md:px-10 max-w-5xl mx-auto">
 
-        {/* INNER */}
-        <div className="relative z-10 overflow-hidden rounded-[2.5rem]">
+        {/* ✅ UPDATED HEADER */}
+        <div className="text-center mb-14">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-white/40 uppercase tracking-[0.5em] text-xs md:text-sm font-light"
+          >
+            Why GenWe Films
+          </motion.p>
+        </div>
 
-          {/* HEADER */}
-          <div className="grid grid-cols-3 px-10 py-6 text-[10px] tracking-[0.3em] uppercase text-white/30">
+        {/* 🧱 TABLE (UNCHANGED) */}
+        <div className="rounded-[2rem] bg-black/80 backdrop-blur-xl border border-white/10 overflow-hidden">
+
+          <div className="hidden md:grid grid-cols-3 px-6 py-4 text-[10px] tracking-[0.4em] uppercase text-white/30">
             <div></div>
             <div>Traditional</div>
             <div className="text-green-400">GenWe Films</div>
           </div>
 
-          {/* ROWS */}
           {data.map((row, i) => (
             <motion.div
               key={row.label}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.06 }}
+              transition={{ delay: i * 0.04 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.01 }}
-
-              className="group grid grid-cols-3 gap-10 px-10 py-8 items-center
-              transition-all duration-300"
+              className="border-t border-white/5 px-5 py-5"
             >
 
-              {/* LABEL */}
-              <div className="flex items-center gap-5">
-                <span className="text-white/10 font-heading italic text-2xl">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+              {/* MOBILE */}
+              <div className="md:hidden">
 
-                <span className="text-white/60 text-sm uppercase tracking-wide">
+                <div className="flex items-center gap-2 text-white/60 text-[10px] tracking-[0.35em] uppercase mb-3">
+                  <span className="w-1.5 h-1.5 bg-white/30 rounded-full" />
                   {row.label}
-                </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+
+                  <div>
+                    <div className="text-white/30 text-[9px] tracking-[0.3em] uppercase mb-1">
+                      Traditional
+                    </div>
+                    <div className="text-white/50 text-sm leading-snug">
+                      {row.traditional}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="text-green-400 text-[9px] tracking-[0.3em] uppercase mb-1">
+                      GenWe
+                    </div>
+                    <div className="text-white text-sm leading-snug">
+                      {row.genwe}
+                    </div>
+                  </div>
+
+                </div>
               </div>
 
-              {/* TRADITIONAL (FIXED) */}
-              <div className="text-white/35 text-sm line-through opacity-80 
-              group-hover:text-white/20 transition duration-300">
-                {row.traditional}
+              {/* DESKTOP */}
+              <div className="hidden md:grid grid-cols-3 items-center gap-6">
+
+                <div className="flex items-center gap-3">
+                  <span className="w-1.5 h-1.5 bg-white/30 rounded-full" />
+                  <span className="text-white/60 text-[11px] tracking-[0.3em] uppercase">
+                    {row.label}
+                  </span>
+                </div>
+
+                <div className="text-white/40 text-[12px] tracking-[0.2em] uppercase">
+                  {row.traditional}
+                </div>
+
+                <div className="text-white text-[13px] tracking-[0.25em] uppercase">
+                  → {row.genwe}
+                </div>
+
               </div>
-
-              {/* GENWE */}
-              <div className="flex items-center gap-4">
-                <span className="text-white/20">→</span>
-
-                <span className="font-heading italic text-xl md:text-2xl text-white tracking-tight 
-                group-hover:tracking-wide transition-all duration-300">
-                  {row.genwe}
-                </span>
-              </div>
-
-              {/* DIVIDER */}
-              <div className="absolute bottom-0 left-10 right-10 h-px bg-white/5" />
 
             </motion.div>
           ))}
 
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

@@ -1,3 +1,4 @@
+import CraftedFor from "./components/CraftedFor";
 import CtaFooter from "./components/CtaFooter";
 import FeaturedFilms from "./components/FeaturedFilms";
 import Hero from "./components/Hero";
@@ -23,6 +24,10 @@ export default function LandingPage() {
         {/* FEATURED FILMS (has its own background effect) */}
         <FeaturedFilms />
 
+        <Divider />
+
+        <CraftedFor />
+        
         <Divider />
 
         {/* WHY GENWE */}

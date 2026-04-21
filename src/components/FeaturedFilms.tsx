@@ -71,27 +71,23 @@ function FeaturedCard({ project, index }: any) {
       className="group cursor-pointer flex flex-col"
       onClick={() => navigate(`/work/${project.slug}`)}
     >
-      {/* 🎥 VIDEO CARD */}
+      {/* VIDEO CARD */}
       <div className="relative rounded-[1.5rem] overflow-hidden aspect-video bg-zinc-900">
 
-        {/* 🔥 BASE BORDER */}
         <div
           className={`absolute inset-0 rounded-[1.5rem] border ${styles.border} opacity-60 group-hover:opacity-100 transition`}
         />
 
-        {/* ✨ ANIMATED BORDER GLOW */}
         <div className="absolute inset-0 rounded-[1.5rem] pointer-events-none opacity-0 group-hover:opacity-100 transition duration-700">
           <div
             className={`absolute inset-[-1px] rounded-[1.5rem] bg-gradient-to-r ${styles.glow} animate-pulse`}
           />
         </div>
 
-        {/* 🔥 BRAND GLOW */}
         <div
           className={`absolute inset-0 opacity-40 group-hover:opacity-100 transition duration-700 bg-gradient-to-r ${styles.glow}`}
         />
 
-        {/* 🎬 VIDEO */}
         <MuxPlayer
           ref={videoRef}
           playbackId={project.playbackId}
@@ -102,10 +98,8 @@ function FeaturedCard({ project, index }: any) {
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
         />
 
-        {/* DARK OVERLAY */}
         <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition" />
 
-        {/* ▶ PLAY BUTTON */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
           <div className="liquid-glass-strong rounded-full w-20 h-20 flex items-center justify-center">
             <Play className="w-8 h-8 text-white fill-white" />
@@ -113,29 +107,35 @@ function FeaturedCard({ project, index }: any) {
         </div>
       </div>
 
-      {/* 🧠 TEXT */}
+      {/* TEXT */}
       <div className="pt-6 space-y-2">
-
-        {/* 🎬 TITLE */}
         <h3 className="text-3xl md:text-4xl font-heading italic text-white leading-tight">
           {project.title}
         </h3>
 
-        {/* ✨ LABEL */}
         <div className="text-[10px] md:text-xs tracking-[0.45em] uppercase text-white/40 font-medium">
           Made by Humans with AI
         </div>
-
       </div>
     </motion.div>
   );
 }
 
 export default function FeaturedFilms() {
+  const navigate = useNavigate();
+
+  const orderedProjects = [
+    "tanishq-jewellery",
+    "vedica-water",
+    "royal-enfield",
+  ]
+    .map((slug) => featuredProjects.find((p) => p.slug === slug))
+    .filter(Boolean);
+
   return (
     <section className="relative overflow-hidden px-6 py-24">
 
-      {/* 🔥 LIQUID CHROME BACKGROUND */}
+      {/* BACKGROUND */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <LiquidChrome
           baseColor={[0.06, 0.06, 0.08]}
@@ -148,13 +148,11 @@ export default function FeaturedFilms() {
         />
       </div>
 
-      {/* 🎬 CINEMATIC FADE */}
       <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black via-black/60 to-black pointer-events-none" />
 
-      {/* CONTENT */}
       <div className="relative z-10 max-w-4xl mx-auto">
 
-        {/* 🎯 HEADING */}
+        {/* HEADING */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -167,12 +165,55 @@ export default function FeaturedFilms() {
           </span>
         </motion.div>
 
-        {/* 🎬 CARDS */}
+        {/* CARDS */}
         <div className="flex flex-col gap-20">
-          {featuredProjects.slice(0, 3).map((p, i) => (
+          {orderedProjects.map((p: any, i: number) => (
             <FeaturedCard key={p.slug} project={p} index={i} />
           ))}
         </div>
+
+        {/* 🔥 SHOWREEL CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="mt-28 flex flex-col items-center text-center"
+        >
+
+          <p className="text-white/40 text-xs md:text-sm tracking-[0.4em] uppercase mb-6">
+            Want to see the full picture?
+          </p>
+
+          <motion.button
+            onClick={() => navigate("/showreel")}
+            whileHover={{ scale: 1.08, y: -6 }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            className="
+              relative overflow-hidden
+              px-10 py-4
+              rounded-full
+              text-white text-sm tracking-[0.35em] uppercase
+              border border-white/20
+              backdrop-blur-md
+              group
+            "
+          >
+            {/* fill */}
+            <span className="absolute inset-0 bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out" />
+
+            {/* text */}
+            <span className="relative z-10 flex items-center gap-2 transition-colors duration-500 group-hover:text-black">
+              View Showreel
+              <Play className="w-4 h-4" />
+            </span>
+
+            {/* glow */}
+            <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition duration-500 blur-xl bg-white/20" />
+          </motion.button>
+
+        </motion.div>
 
       </div>
     </section>
