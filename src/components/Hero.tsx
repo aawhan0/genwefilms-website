@@ -36,13 +36,13 @@ export default function Hero() {
         className="bg-video-container pointer-events-none"
       >
         <MuxPlayer
-          playbackId="ri700145U7jN7kmhKRiAbVt2qk6jM8cezZvupUKAzfhI"
+          playbackId="Aib9TO01f44nd35MDPsLeBgLHy3ekyq00fmPnH5WOkySk"
           autoPlay
           muted
           loop
           playsInline
           onLoadedMetadata={() => setVideoReady(true)}
-          poster="https://image.mux.com/ri700145U7jN7kmhKRiAbVt2qk6jM8cezZvupUKAzfhI/thumbnail.jpg"
+          poster="https://image.mux.com/Aib9TO01f44nd35MDPsLeBgLHy3ekyq00fmPnH5WOkySk/thumbnail.jpg"
           className="bg-video scale-110"
         />
       </motion.div>

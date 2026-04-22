@@ -1,6 +1,6 @@
 import { Play } from "lucide-react";
-import { motion } from "motion/react";
-import { useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { featuredProjects } from "../data/projects";
 import MuxPlayer from "@mux/mux-player-react";
@@ -13,19 +13,16 @@ function getBrandStyles(title: string) {
         glow: "from-blue-400/40 via-cyan-300/10 to-transparent",
         border: "border-blue-400/30",
       };
-
     case "Royal Enfield":
       return {
         glow: "from-orange-500/50 via-red-500/10 to-transparent",
         border: "border-orange-400/30",
       };
-
     case "Tanishq":
       return {
         glow: "from-yellow-400/50 via-amber-200/10 to-transparent",
         border: "border-yellow-300/30",
       };
-
     default:
       return {
         glow: "from-white/10 to-transparent",
@@ -36,15 +33,18 @@ function getBrandStyles(title: string) {
 
 function FeaturedCard({ project, index }: any) {
   const navigate = useNavigate();
+
   const videoRef = useRef<any>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
 
   const styles = getBrandStyles(project.title);
 
+  // ✅ Autoplay observer fix
   useEffect(() => {
     const video = videoRef.current;
-    const card = cardRef.current;
-    if (!video || !card) return;
+    const container = videoContainerRef.current;
+
+    if (!video || !container) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -58,63 +58,68 @@ function FeaturedCard({ project, index }: any) {
       { threshold: 0.3 }
     );
 
-    observer.observe(card);
+    observer.observe(container);
     return () => observer.disconnect();
   }, []);
 
   return (
     <motion.div
-      ref={cardRef}
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.9, delay: index * 0.15 }}
-      className="group cursor-pointer flex flex-col"
-      onClick={() => navigate(`/work/${project.slug}`)}
+      className="flex justify-center"
+      onClick={() =>
+        navigate(`/work/${project.slug}`, { state: { from: "home" } })
+      }
     >
-      {/* VIDEO CARD */}
-      <div className="relative rounded-[1.5rem] overflow-hidden aspect-video bg-zinc-900">
+      {/* 🔥 WHITE CARD */}
+      <div className="w-full max-w-4xl bg-white rounded-[2rem] p-6 md:p-8 shadow-[0_25px_80px_rgba(0,0,0,0.25)] hover:scale-[1.01] transition duration-500 cursor-pointer">
 
-        <div
-          className={`absolute inset-0 rounded-[1.5rem] border ${styles.border} opacity-60 group-hover:opacity-100 transition`}
-        />
+        <div className="space-y-6">
 
-        <div className="absolute inset-0 rounded-[1.5rem] pointer-events-none opacity-0 group-hover:opacity-100 transition duration-700">
+          {/* 🎬 VIDEO */}
           <div
-            className={`absolute inset-[-1px] rounded-[1.5rem] bg-gradient-to-r ${styles.glow} animate-pulse`}
-          />
-        </div>
+            ref={videoContainerRef}
+            className="relative rounded-[1.5rem] overflow-hidden aspect-video bg-zinc-900 group"
+          >
+            <div className={`absolute inset-0 rounded-[1.5rem] border ${styles.border} opacity-60 group-hover:opacity-100 transition`} />
 
-        <div
-          className={`absolute inset-0 opacity-40 group-hover:opacity-100 transition duration-700 bg-gradient-to-r ${styles.glow}`}
-        />
+            <div className="absolute inset-0 rounded-[1.5rem] pointer-events-none opacity-0 group-hover:opacity-100 transition duration-700">
+              <div className={`absolute inset-[-1px] rounded-[1.5rem] bg-gradient-to-r ${styles.glow} animate-pulse`} />
+            </div>
 
-        <MuxPlayer
-          ref={videoRef}
-          playbackId={project.playbackId}
-          muted
-          loop
-          playsInline
-          autoPlay={false}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-        />
+            <div className={`absolute inset-0 opacity-40 group-hover:opacity-100 transition duration-700 bg-gradient-to-r ${styles.glow}`} />
 
-        <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition" />
+            <MuxPlayer
+              ref={videoRef}
+              playbackId={project.playbackId}
+              muted
+              loop
+              playsInline
+              autoPlay={false}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+            />
 
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-          <div className="liquid-glass-strong rounded-full w-20 h-20 flex items-center justify-center">
-            <Play className="w-8 h-8 text-white fill-white" />
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition" />
+
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+              <div className="liquid-glass-strong rounded-full w-20 h-20 flex items-center justify-center">
+                <Play className="w-8 h-8 text-white fill-white" />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      {/* TEXT */}
-      <div className="pt-6 space-y-2">
-        <h3 className="text-3xl md:text-4xl font-heading italic text-white leading-tight">
-          {project.title}
-        </h3>
+          {/* 📝 TEXT */}
+          <div className="space-y-2 px-2">
+            <h3 className="text-3xl md:text-4xl font-heading italic text-black leading-tight">
+              {project.brand || project.title}
+            </h3>
 
-        <div className="text-[10px] md:text-xs tracking-[0.45em] uppercase text-white/40 font-medium">
-          Made by Humans with AI
+            <div className="text-[10px] md:text-xs tracking-[0.45em] uppercase text-neutral-500 font-medium">
+              Made by Humans with AI
+            </div>
+          </div>
+
         </div>
       </div>
     </motion.div>
@@ -122,7 +127,24 @@ function FeaturedCard({ project, index }: any) {
 }
 
 export default function FeaturedFilms() {
-  const navigate = useNavigate();
+  const [showReelOpen, setShowReelOpen] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // ESC close
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setShowReelOpen(false);
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, []);
+
+  // click outside close
+  const handleOutsideClick = (e: any) => {
+    if (modalRef.current && !modalRef.current.contains(e.target)) {
+      setShowReelOpen(false);
+    }
+  };
 
   const orderedProjects = [
     "tanishq-jewellery",
@@ -137,85 +159,87 @@ export default function FeaturedFilms() {
 
       {/* BACKGROUND */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <LiquidChrome
-          baseColor={[0.06, 0.06, 0.08]}
-          speed={0.18}
-          amplitude={0.25}
-          frequencyX={2.2}
-          frequencyY={1.6}
-          interactive={true}
-          className="w-full h-full opacity-30"
-        />
+        <LiquidChrome className="w-full h-full opacity-30" />
       </div>
-
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black via-black/60 to-black pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto">
 
-        {/* HEADING */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <span className="text-white/20 text-[10px] md:text-xs tracking-[0.45em] uppercase">
-            AI Conceptual Films
+        {/* 🔥 SECTION TITLE */}
+        <div className="text-center mb-16">
+          <span className="text-white/20 text-xs tracking-[0.45em] uppercase">
+            Speculative Advertisements
           </span>
-        </motion.div>
+        </div>
 
-        {/* CARDS */}
+        {/* 🎬 CARDS */}
         <div className="flex flex-col gap-20">
           {orderedProjects.map((p: any, i: number) => (
             <FeaturedCard key={p.slug} project={p} index={i} />
           ))}
         </div>
 
-        {/* 🔥 SHOWREEL CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="mt-28 flex flex-col items-center text-center"
-        >
-
-          <p className="text-white/40 text-xs md:text-sm tracking-[0.4em] uppercase mb-6">
+        {/* 🎯 CTA */}
+        <div className="mt-28 flex flex-col items-center text-center">
+          <p className="text-white/40 text-sm tracking-[0.4em] uppercase mb-6">
             Want to see the full picture?
           </p>
 
           <motion.button
-            onClick={() => navigate("/showreel")}
+            onClick={() => setShowReelOpen(true)}
             whileHover={{ scale: 1.08, y: -6 }}
             whileTap={{ scale: 0.96 }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="
-              relative overflow-hidden
-              px-10 py-4
-              rounded-full
-              text-white text-sm tracking-[0.35em] uppercase
-              border border-white/20
-              backdrop-blur-md
-              group
-            "
+            className="relative overflow-hidden px-10 py-4 rounded-full text-white text-sm tracking-[0.35em] uppercase border border-white/20 backdrop-blur-md group"
           >
-            {/* fill */}
             <span className="absolute inset-0 bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out" />
 
-            {/* text */}
             <span className="relative z-10 flex items-center gap-2 transition-colors duration-500 group-hover:text-black">
               View Showreel
               <Play className="w-4 h-4" />
             </span>
 
-            {/* glow */}
             <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition duration-500 blur-xl bg-white/20" />
           </motion.button>
-
-        </motion.div>
-
+        </div>
       </div>
+
+      {/* 🎬 NETFLIX STYLE SHOWREEL */}
+      <AnimatePresence>
+        {showReelOpen && (
+          <motion.div
+            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xl flex items-center justify-center"
+            onClick={handleOutsideClick}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <button
+              onClick={() => setShowReelOpen(false)}
+              className="absolute top-6 right-8 text-white/50 hover:text-white text-sm"
+            >
+              Close ✕
+            </button>
+
+            <motion.div
+              ref={modalRef}
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="relative w-full max-w-6xl aspect-video rounded-xl overflow-hidden shadow-[0_40px_120px_rgba(0,0,0,0.6)]"
+            >
+              <iframe
+                src="https://www.youtube.com/embed/NTF5OLIL788?autoplay=1&mute=0&controls=0&rel=0&modestbranding=1&playsinline=1"
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+                className="w-full h-full"
+              />
+
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
