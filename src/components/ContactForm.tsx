@@ -5,11 +5,33 @@ import emailjs from "@emailjs/browser";
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
-  const [projectType, setProjectType] = useState("Ad Film");
+  const [projectType, setProjectType] = useState("Product AI Ads");
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const [timeline, setTimeline] = useState("");
+  const [timelineOpen, setTimelineOpen] = useState(false);
+
   const [loading, setLoading] = useState(false);
 
-  const projectTypes = ["Ad Film", "Brand Film", "Social Content", "AI Video"];
+  // ✅ UPDATED PROJECT TYPES
+  const projectTypes = [
+    "Product AI Ads",
+    "CGI Ads",
+    "AI Brand Ads",
+    "AI Short Film",
+    "Product CGI Ads",
+    "Cinematic Brand Film",
+    "Luxury Story Film",
+    "Adventure Brand Film",
+  ];
+
+  // ✅ NEW TIMELINE OPTIONS
+  const timelineOptions = [
+    "Within 7 Days",
+    "Within 14 Days",
+    "Within 30 Days",
+    "Within 60 Days",
+  ];
 
   const validateEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -49,7 +71,6 @@ export default function ContactForm() {
         return;
       }
 
-      // email runs silently
       emailjs
         .send(
           "service_genwefilms",
@@ -61,7 +82,6 @@ export default function ContactForm() {
 
       setSubmitted(true);
       e.target.reset();
-
     } catch {
       alert("Something went wrong. Please try again.");
     }
@@ -77,7 +97,6 @@ export default function ContactForm() {
         transition={{ duration: 0.4 }}
         className="liquid-glass rounded-3xl p-12 text-center max-w-2xl mx-auto border border-white/5 w-full flex flex-col items-center gap-6"
       >
-        {/* ✅ Minimal animated check */}
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -94,7 +113,6 @@ export default function ContactForm() {
           </motion.span>
         </motion.div>
 
-        {/* TEXT */}
         <h2 className="text-3xl md:text-4xl font-heading italic text-white">
           Received.
         </h2>
@@ -140,7 +158,7 @@ export default function ContactForm() {
               name="name"
               required
               type="text"
-              placeholder="e.g. Julian Anderson"
+              placeholder="e.g. John Doe"
               className="bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white focus:outline-none focus:border-white/30 w-full"
             />
           </div>
@@ -153,13 +171,16 @@ export default function ContactForm() {
               name="email"
               required
               type="email"
-              placeholder="e.g. julian@brand.com"
+              placeholder="e.g. john@brand.com"
               className="bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white focus:outline-none focus:border-white/30 w-full"
             />
           </div>
         </div>
 
+        {/* 🔥 UPDATED SECTION */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+
+          {/* PROJECT TYPE */}
           <div className="flex flex-col gap-3">
             <label className="text-[10px] uppercase tracking-[0.2em] text-white/40 ml-4">
               Project Type
@@ -190,16 +211,40 @@ export default function ContactForm() {
             )}
           </div>
 
+          {/* TIMELINE (NEW DROPDOWN) */}
           <div className="flex flex-col gap-3">
             <label className="text-[10px] uppercase tracking-[0.2em] text-white/40 ml-4">
-              Timeline
+              When Do You Want To Begin
             </label>
-            <input
-              name="timeline"
-              placeholder="e.g. Next 3 weeks"
-              className="bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white"
-            />
+
+            <div
+              className="bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white cursor-pointer flex justify-between"
+              onClick={() => setTimelineOpen(!timelineOpen)}
+            >
+              {timeline || "Select"}
+            </div>
+
+            {timelineOpen && (
+              <div className="bg-[#111] border border-white/10 rounded-xl mt-2">
+                {timelineOptions.map((option) => (
+                  <div
+                    key={option}
+                    className="px-6 py-3 hover:bg-white/5 cursor-pointer"
+                    onClick={() => {
+                      setTimeline(option);
+                      setTimelineOpen(false);
+                    }}
+                  >
+                    {option}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* hidden input for backend */}
+            <input type="hidden" name="timeline" value={timeline} />
           </div>
+
         </div>
 
         <div className="flex flex-col gap-3">

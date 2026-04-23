@@ -2,7 +2,7 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logos/logo-transparent.png";
+import logo from "../assets/logos/brand-logo.png";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,7 +10,7 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "AI Studio", path: "/ai-studio" },
-    { name: "Connect", path: "/contact" },
+    { name: "Connect", path: "/connect" },
   ];
 
   return (

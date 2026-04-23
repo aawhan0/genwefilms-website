@@ -3,14 +3,14 @@ import ScrollToTop from "./components/ScrollToTop";
 
 import LandingPage from "./LandingPage";
 import ProjectPage from "./ProjectPage";
-
+import Connect from "./pages/Connect";
 import AIStudio from "./pages/AIStudio";
 
 import Work from "./pages/Work";
 import Process from "./pages/Process";
-import Contact from "./pages/Contact";
+// ❌ Contact removed
 
-import Privacy from "./pages/Privacy";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
 
 export default function App() {
@@ -23,7 +23,7 @@ export default function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/ai-studio" element={<AIStudio />} />
 
-        {/* 🔥 FIXED */}
+        {/* 🔥 AI Studio Projects */}
         <Route path="/ai-studio/:slug" element={<ProjectPage />} />
 
         {/* 🎬 Work */}
@@ -32,9 +32,10 @@ export default function App() {
 
         {/* 📄 Static */}
         <Route path="/process" element={<Process />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/privacy" element={<Privacy />} />
+        {/* ❌ Contact route removed */}
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/connect" element={<Connect />} />
 
         {/* 404 */}
         <Route

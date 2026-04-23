@@ -44,16 +44,6 @@ export const projects: Project[] = [
   },
 
   {
-    slug: "ai-films",
-    title: "Speculative Advertisements",
-    brand: "Dog's Years",
-    description: `A dog who lost his human. A cat who had no one. A cemetery where both found each other. We wrote this as a proper short film, with acts, silence and an ending that earns its emotion. Production was about restraint. No dialogue, no explanation. Post was purely music and pacing. AI was our cinematographer. The grief and warmth were written long before the first frame rendered.`,
-    type: "AI Studio",
-    playbackId: "AgDWYkfWkSY54ilA9Ocjw5xNxTEWKT9Kb8eQZEO4ezI",
-    category: "ai-studio",
-  },
-
-  {
     slug: "product-cgi-ads",
     title: "Product CGI Ads",
     brand: "Lay's",
@@ -64,12 +54,12 @@ export const projects: Project[] = [
   },
 
   {
-    slug: "ai-influencer-ugc",
-    title: "AI Influencer & UGC",
-    brand: "Coming Soon",
-    description: `AI-driven influencer content and scalable UGC.`,
+    slug: "ai-films",
+    title: "AI Short Films", // ✅ UPDATED
+    brand: "Dog's Years",
+    description: `A dog who lost his human. A cat who had no one. A cemetery where both found each other. We wrote this as a proper short film, with acts, silence and an ending that earns its emotion. Production was about restraint. No dialogue, no explanation. Post was purely music and pacing. AI was our cinematographer. The grief and warmth were written long before the first frame rendered.`,
     type: "AI Studio",
-    playbackId: undefined,
+    playbackId: "AgDWYkfWkSY54ilA9Ocjw5xNxTEWKT9Kb8eQZEO4ezI",
     category: "ai-studio",
   },
 

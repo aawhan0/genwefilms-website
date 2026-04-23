@@ -75,7 +75,7 @@ export default function CtaFooter() {
           <div className="flex items-center gap-6 md:gap-8">
 
             <Link
-              to="/privacy"
+              to="/privacy-policy"
               className="text-white/30 text-[10px] md:text-xs font-body tracking-wider uppercase hover:text-white/60 transition-colors"
             >
               Privacy
@@ -87,13 +87,6 @@ export default function CtaFooter() {
             >
               Terms
             </Link>
-
-            <a
-              href="#contact"
-              className="text-white/30 text-[10px] md:text-xs font-body tracking-wider uppercase hover:text-white/60 transition-colors"
-            >
-              Contact
-            </a>
 
           </div>
         </div>

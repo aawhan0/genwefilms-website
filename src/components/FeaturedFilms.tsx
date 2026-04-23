@@ -155,7 +155,7 @@ export default function FeaturedFilms() {
     <section className="relative overflow-hidden px-6 py-24">
 
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <LiquidChrome className="w-full h-full opacity-30" />
+        <LiquidChrome className="w-full h-full opacity-15" />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto">
