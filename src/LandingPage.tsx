@@ -25,16 +25,12 @@ export default function LandingPage() {
         <FeaturedFilms />
 
         <Divider />
-
-        <CraftedFor />
+        
+        <WhyGenwe />
         
         <Divider />
 
-        {/* WHY GENWE */}
-        <WhyGenwe />
-
-        <Divider />
-
+        <CraftedFor />
         {/* CTA */}
         <div id="contact">
           <CtaFooter />

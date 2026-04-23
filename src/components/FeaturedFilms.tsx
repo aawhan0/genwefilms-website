@@ -39,7 +39,6 @@ function FeaturedCard({ project, index }: any) {
 
   const styles = getBrandStyles(project.title);
 
-  // ✅ Autoplay observer fix
   useEffect(() => {
     const video = videoRef.current;
     const container = videoContainerRef.current;
@@ -72,10 +71,10 @@ function FeaturedCard({ project, index }: any) {
         navigate(`/work/${project.slug}`, { state: { from: "home" } })
       }
     >
-      {/* 🔥 WHITE CARD */}
-      <div className="w-full max-w-4xl bg-white rounded-[2rem] p-6 md:p-8 shadow-[0_25px_80px_rgba(0,0,0,0.25)] hover:scale-[1.01] transition duration-500 cursor-pointer">
+      {/* ✅ REMOVED WHITE CARD */}
+      <div className="w-full max-w-4xl rounded-[2rem] transition duration-500 cursor-pointer">
 
-        <div className="space-y-6">
+        <div className="space-y-8">
 
           {/* 🎬 VIDEO */}
           <div
@@ -111,12 +110,12 @@ function FeaturedCard({ project, index }: any) {
 
           {/* 📝 TEXT */}
           <div className="space-y-2 px-2">
-            <h3 className="text-3xl md:text-4xl font-heading italic text-black leading-tight">
+            <h3 className="text-3xl md:text-4xl font-heading italic text-white leading-tight">
               {project.brand || project.title}
             </h3>
 
-            <div className="text-[10px] md:text-xs tracking-[0.45em] uppercase text-neutral-500 font-medium">
-              Made by Humans with AI
+          <div className="text-[10px] md:text-xs tracking-[0.45em] uppercase text-white/60 font-medium">
+          Made by Humans with AI
             </div>
           </div>
 
@@ -130,7 +129,6 @@ export default function FeaturedFilms() {
   const [showReelOpen, setShowReelOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // ESC close
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setShowReelOpen(false);
@@ -139,7 +137,6 @@ export default function FeaturedFilms() {
     return () => window.removeEventListener("keydown", handleKey);
   }, []);
 
-  // click outside close
   const handleOutsideClick = (e: any) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
       setShowReelOpen(false);
@@ -157,28 +154,24 @@ export default function FeaturedFilms() {
   return (
     <section className="relative overflow-hidden px-6 py-24">
 
-      {/* BACKGROUND */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <LiquidChrome className="w-full h-full opacity-30" />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto">
 
-        {/* 🔥 SECTION TITLE */}
         <div className="text-center mb-16">
-          <span className="text-white/20 text-xs tracking-[0.45em] uppercase">
-            Speculative Advertisements
+          <span className="text-white/30 text-xs tracking-[0.45em] uppercase">
+            Speculative AI Advertisements
           </span>
         </div>
 
-        {/* 🎬 CARDS */}
         <div className="flex flex-col gap-20">
           {orderedProjects.map((p: any, i: number) => (
             <FeaturedCard key={p.slug} project={p} index={i} />
           ))}
         </div>
 
-        {/* 🎯 CTA */}
         <div className="mt-28 flex flex-col items-center text-center">
           <p className="text-white/40 text-sm tracking-[0.4em] uppercase mb-6">
             Want to see the full picture?
@@ -203,7 +196,6 @@ export default function FeaturedFilms() {
         </div>
       </div>
 
-      {/* 🎬 NETFLIX STYLE SHOWREEL */}
       <AnimatePresence>
         {showReelOpen && (
           <motion.div

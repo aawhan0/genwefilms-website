@@ -84,7 +84,7 @@ export const projects: Project[] = [
 A son. A father's last bike. The Aravalli hills.
 We obsessed over every detail, the jodhpuri attire in the final frame, the silence of the ride and tears, the weight of legacy. AI rendered the world. But the story came from understanding what it means to belong somewhere. Some films you make with a camera. Some you make with memory.`,
     type: "Adventure Brand Film",
-    playbackId: "eocxI16G1GZhTHHUetrbsQ00ywJw01Gpx9wcv02NcsYipA",
+    playbackId: "XQ00Aj00pVslH014N1Bz9VnnjoLssoXqUrg6VvHJP4hNKI",
     featured: true,
     category: "work",
   },

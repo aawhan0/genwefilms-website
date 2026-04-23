@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 
 interface MenuItemData {
-  link: string;
   text: string;
   image: string;
 }
@@ -52,7 +51,6 @@ const FlowingMenu: React.FC<FlowingMenuProps> = ({
 };
 
 const MenuItem: React.FC<MenuItemProps> = ({
-  link,
   text,
   image,
   speed,
@@ -84,14 +82,17 @@ const MenuItem: React.FC<MenuItemProps> = ({
   useEffect(() => {
     const calculateRepetitions = () => {
       if (!marqueeInnerRef.current) return;
+
       const marqueeContent = marqueeInnerRef.current.querySelector(
         ".marquee-part"
       ) as HTMLElement;
+
       if (!marqueeContent) return;
 
       const contentWidth = marqueeContent.offsetWidth;
       const viewportWidth = window.innerWidth;
       const needed = Math.ceil(viewportWidth / contentWidth) + 2;
+
       setRepetitions(Math.max(4, needed));
     };
 
@@ -131,7 +132,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
     };
   }, [text, image, repetitions, speed]);
 
-  const handleMouseEnter = (ev: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleMouseEnter = (ev: React.MouseEvent<HTMLDivElement>) => {
     if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current)
       return;
 
@@ -154,7 +155,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
       .to([marqueeRef.current, marqueeInnerRef.current], { y: "0%" });
   };
 
-  const handleMouseLeave = (ev: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleMouseLeave = (ev: React.MouseEvent<HTMLDivElement>) => {
     if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current)
       return;
 
@@ -184,18 +185,17 @@ const MenuItem: React.FC<MenuItemProps> = ({
         borderTop: isFirst ? "none" : `1px solid ${borderColor}`,
       }}
     >
-      {/* TEXT */}
-      <a
-        href={link}
+      {/* TEXT (NO LINK NOW) */}
+      <div
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="flex items-center justify-center h-full uppercase font-semibold text-[4vh]"
+        className="flex items-center justify-center h-full uppercase font-semibold text-[4vh] cursor-default select-none"
         style={{ color: textColor }}
       >
         {text}
-      </a>
+      </div>
 
-      {/* 🔥 WHITE STRIP */}
+      {/* WHITE STRIP */}
       <div
         className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none translate-y-[101%] backdrop-blur-md"
         ref={marqueeRef}
@@ -207,19 +207,16 @@ const MenuItem: React.FC<MenuItemProps> = ({
               className="marquee-part flex items-center flex-shrink-0"
               key={idx}
             >
-              {/* TEXT */}
               <span className="whitespace-nowrap uppercase text-[4vh] px-[2vw] text-black">
                 {text}
               </span>
 
-              {/* 🔥 LOGO WITH PADDING + GLOW */}
               <div className="mx-[3vw] flex items-center justify-center">
                 <div
                   className="w-[140px] h-[6vh] bg-contain bg-no-repeat bg-center transition duration-500"
                   style={{
                     backgroundImage: `url(${image})`,
-                    filter:
-                      "drop-shadow(0px 0px 8px rgba(0,0,0,0.15))",
+                    filter: "drop-shadow(0px 0px 8px rgba(0,0,0,0.15))",
                   }}
                 />
               </div>

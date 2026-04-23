@@ -1,6 +1,4 @@
-import { motion } from "motion/react";
 import Navbar from "../components/Navbar";
-import CtaFooter from "../components/CtaFooter";
 import ContactForm from "../components/ContactForm";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
@@ -21,7 +19,7 @@ export default function Contact() {
   return (
     <div className="relative min-h-screen text-white overflow-hidden">
 
-      {/* ✅ TRUE BACKGROUND */}
+      {/* BACKGROUND */}
       <div className="absolute inset-0 -z-10">
         <Aurora
           colorStops={["#7cff67", "#B497CF", "#5227FF"]}
@@ -31,40 +29,63 @@ export default function Contact() {
         />
       </div>
 
-      {/* ✅ DARK OVERLAY WITH GRADIENT (for readability and blending into the section below) */}
+      {/* DARK OVERLAY */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/20 via-black/50 to-[#0a0a0a]" />
 
-      {/* ✅ CONTENT */}
+      {/* CONTENT */}
       <main className="relative z-10">
 
         <Navbar />
 
-        {/* Centered Form Section */}
-        <section id="contact-form" className="pt-28 md:pt-26 pb-16 md:pb-24 flex items-start">
+        {/* HERO + FORM */}
+        <section
+          id="contact-form"
+          className="pt-28 md:pt-26 pb-16 md:pb-24 flex items-start"
+        >
           <ContactForm />
         </section>
 
-        {/* Info Section */}
-        <section className="py-24 border-t border-white/5 bg-white/[0.01]">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 max-w-4xl mx-auto text-center md:text-left">
-              <div className="flex flex-col gap-2 italic items-center md:items-start">
-                <span className="text-white/40 text-xs uppercase tracking-widest not-italic">Presence</span>
-                <span className="text-xl md:text-2xl font-heading">Global</span>
+        {/* 🔥 CLEAN STACKED INFO SECTION */}
+        <section className="py-24 border-t border-white/5 bg-white/[0.01] relative">
+
+          {/* subtle divider */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[160px] h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+          <div className="max-w-md mx-auto px-6 text-center space-y-12">
+
+            {/* Presence */}
+            <div className="space-y-2">
+              <div className="text-white/30 text-[10px] tracking-[0.35em] uppercase">
+                Presence
               </div>
-              <div className="flex flex-col gap-2 italic items-center md:items-start">
-                <span className="text-white/40 text-xs uppercase tracking-widest not-italic">Direct</span>
-                <span className="text-xl md:text-2xl font-heading">Contact@Genwefilms.com</span>
-              </div>
-              <div className="flex flex-col gap-2 italic items-center md:items-start">
-                <span className="text-white/40 text-xs uppercase tracking-widest not-italic">Updates</span>
-                <span className="text-xl md:text-2xl font-heading">@genwefilms</span>
+              <div className="text-sm text-white/70 tracking-wide">
+                Global
               </div>
             </div>
+
+            {/* Email */}
+            <div className="space-y-2">
+              <div className="text-white/30 text-[10px] tracking-[0.35em] uppercase">
+                Direct
+              </div>
+              <div className="text-sm text-white/70 break-all hover:text-white transition">
+                contact@genwefilms.com
+              </div>
+            </div>
+
+            {/* Social */}
+            <div className="space-y-2">
+              <div className="text-white/30 text-[10px] tracking-[0.35em] uppercase">
+                Updates
+              </div>
+              <div className="text-sm text-white/70 tracking-wide">
+                @genwefilms_ai
+              </div>
+            </div>
+
           </div>
         </section>
 
-        {/* <CtaFooter /> */}
       </main>
     </div>
   );

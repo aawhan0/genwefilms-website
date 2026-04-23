@@ -2,7 +2,7 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logodraft1.png";
+import logo from "../assets/logos/logo-transparent.png";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,11 +21,15 @@ export default function Navbar() {
         {/* Glass background */}
         <div className="absolute inset-0 bg-white/[0.04] backdrop-blur-2xl border border-white/10 rounded-full mx-2 md:mx-4 lg:mx-8 pointer-events-auto" />
 
-        <div className="relative w-full flex items-center justify-between py-2 md:py-3 px-4 md:px-6 pointer-events-auto">
+        <div className="relative w-full flex items-center justify-between py-2 md:py-2 px-4 md:px-6 pointer-events-auto">
 
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <img src={logo} alt="Genwe Films Logo" className="h-5 md:h-6 opacity-90 object-contain" />
+          {/* ✅ LOGO (balanced size) */}
+          <Link to="/" className="flex items-center">
+            <img
+              src={logo}
+              alt="Genwe Films Logo"
+              className="h-10 md:h-12 lg:h-14 w-auto object-contain opacity-95"
+            />
           </Link>
 
           {/* Desktop Nav */}
