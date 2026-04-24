@@ -73,10 +73,10 @@ export default function ContactForm() {
 
       emailjs
         .send(
-          "service_genwefilms",
-          "template_dntgyac",
+          "Genwefilms_ai",
+          "template_y25973g",
           data,
-          "MR0_OcrtTuEDf6y2b"
+          "pXm_36J49xPtTLhoq"
         )
         .catch(() => {});
 
