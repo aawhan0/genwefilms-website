@@ -47,10 +47,10 @@ export default function CtaFooter() {
 
             <div className="flex flex-col sm:flex-row items-center gap-4 mt-2">
               <Link
-                to="/contact#contact-form"
+                to="/connect#contact-form"
                 className="w-full sm:w-auto bg-white text-black rounded-full px-8 md:px-10 py-3 md:py-4 font-medium text-sm md:text-base hover:bg-white/90 transition-colors flex items-center justify-center gap-2 group"
               >
-                Start a Project
+                Start your project
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
 
