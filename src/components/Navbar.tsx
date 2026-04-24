@@ -48,7 +48,7 @@ export default function Navbar() {
           {/* CTA + Mobile */}
           <div className="flex items-center gap-3">
 
-            <Link to="/contact#contact-form">
+            <Link to="/connect#contact-form">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
